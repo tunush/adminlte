@@ -5,8 +5,33 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'App\Http\Controllers\HomeController@index');
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+// Route::get('/', 'App\Http\Controllers\HomeController@index');
+// Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/', 'App\Http\Controllers\PlaceHolderController@index');
+Route::get('/home', 'App\Http\Controllers\PlaceHolderController@index')->name('home');
+
+Route::get('/conversations', 'App\Http\Controllers\PlaceHolderController@index')->name('conversations');
+Route::get('/task_manager', 'App\Http\Controllers\PlaceHolderController@index')->name('task_manager');
+Route::get('/calendar', 'App\Http\Controllers\PlaceHolderController@index')->name('calendar');
+Route::get('/white_board', 'App\Http\Controllers\PlaceHolderController@index')->name('white_board');
+Route::get('/dashboard', 'App\Http\Controllers\PlaceHolderController@index')->name('dashboard');
+Route::get('/pipeline', 'App\Http\Controllers\PlaceHolderController@index')->name('pipeline');
+Route::get('/seller', 'App\Http\Controllers\PlaceHolderController@index')->name('seller');
+Route::get('/buyer', 'App\Http\Controllers\PlaceHolderController@index')->name('buyer');
+Route::get('/estimator', 'App\Http\Controllers\PlaceHolderController@index')->name('estimator');
+Route::get('/properties', 'App\Http\Controllers\PlaceHolderController@index')->name('properties');
+Route::get('/buyers', 'App\Http\Controllers\PlaceHolderController@index')->name('buyers');
+Route::get('/contacts', 'App\Http\Controllers\PlaceHolderController@index')->name('contacts');
+Route::get('/reporting', 'App\Http\Controllers\PlaceHolderController@index')->name('reporting');
+Route::get('/call_scripts', 'App\Http\Controllers\PlaceHolderController@index')->name('call_scripts');
+
+Route::get('/custom_fields', 'App\Http\Controllers\PlaceHolderController@index')->name('custom_fields');
+Route::get('/default_fields', 'App\Http\Controllers\PlaceHolderController@index')->name('default_fields');
+Route::get('/smtp', 'App\Http\Controllers\PlaceHolderController@index')->name('smtp');
+Route::get('/phone', 'App\Http\Controllers\PlaceHolderController@index')->name('phone');
+Route::get('/workflow', 'App\Http\Controllers\PlaceHolderController@index')->name('workflow');
+Route::get('/calendars', 'App\Http\Controllers\PlaceHolderController@index')->name('calendars');
+
 Route::get('/config', 'App\Http\Controllers\ConfigController@index')->name('config');
 Route::put('/config/update/{id}', 'App\Http\Controllers\ConfigController@update')->name('config.update');
 

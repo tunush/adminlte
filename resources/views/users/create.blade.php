@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
-                                    <label for="nome">Permission Group</label>
+                                    <label for="nome">Role</label>
                                     <select name="roles[]" class="form-control select2" multiple="multiple" data-placeholder="Permission Group" required="">
                                         @foreach($roles as $role)
                                             @if($role->id != 1)                                            
@@ -85,9 +85,12 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-lg-6"></div> 
                             <div class="col-lg-6">
-                               <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-fw fa-plus"></i> Add</button>
+                                <label>Include a personalized message (optional)</label>
+                                <textarea name="message" class="form-control"></textarea>
+                            </div> 
+                            <div class="col-lg-12">
+                               <button type="submit" class="btn btn-primary pull-right">Send Invintation</button>
                             </div>
                         </div>
                     </form>

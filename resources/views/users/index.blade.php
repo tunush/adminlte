@@ -7,15 +7,21 @@
 @section('menu_pagina')	
 		
 	<li role="presentation">
-		<a href="{{ route('user.create') }}" class="link_menu_page">
-			<i class="fa fa-plus"></i> Add
+		<a href="#" class="link_menu_page" data-toggle="modal" data-target="#modal-invite">
+			<i class="fa fa-plus"></i> Invite Someone
 		</a>								
 	</li>
-	<li role="presentation">
+
+	<!-- <li role="presentation">
+		<a href="{{ route('user.create') }}" class="link_menu_page">
+			<i class="fa fa-plus"></i> Invite
+		</a>								
+	</li> -->
+	<!-- <li role="presentation">
 		<a href="{{ route('role') }}" class="link_menu_page">
 			<i class="fa fa-unlock-alt"></i> Permissions
 		</a>								
-	</li>
+	</li> -->
 
 @endsection
 
@@ -31,9 +37,10 @@
 								<tr>			 
 									<th>Name</th>			 
 									<th>E-mail</th>
-									<th class="text-center">Status</th>
-									<th class="text-center">Created</th>			 
-									<th class="text-center">Actions</th>			 
+									<th>Role</th>
+									<!-- <th class="text-center">Status</th> -->
+									<!-- <th class="text-center">Created</th> -->
+									<th class="text-center"></th> 
 								</tr>
 							</thead>
 							<tbody>
@@ -47,22 +54,39 @@
 													<a herf="#" title="OffLine"><span class="text-red"><i class="fa fa-fw fa-circle"></i></span></a> 
 						                        @endif
 												{{ $user->name }}
-											</td>             
-											<td>{{ $user->email }}</td>             
-											<td class="text-center">
+											</td>
+											<td>{{ $user->email }}</td>
+											<td>
+												@php
+													$user = App\Models\User::find($user->id);
+													$roles = App\Models\Role::all();
+													$roles_ids = App\Models\Role::rolesUser($user);
+												@endphp
+												@foreach($roles as $role)
+													@if($role->id != 1)
+														@if(in_array($role->id, $roles_ids))
+															{{ $role->name}}
+														@endif                                             
+													@endif                                             
+												@endforeach
+											</td>
+											<!-- <td class="text-center">
 												@if($user->active == true)
 													<span class="label label-success">Active</span>
 												@else
 													<span class="label label-danger">Inactive</span>
 												@endif
-											</td>             
-											<td class="text-center">{{ $user->created_at->format('d/m/Y H:i') }}</td>             
-											<td class="text-center"> 
-												 <a class="btn btn-default  btn-xs" href="{{ route('user.show', $user->id) }}" title="See {{ $user->name }}"><i class="fa fa-eye">   </i></a>
-												 <a class="btn btn-primary  btn-xs" href="{{ route('user.edit.password', $user->id) }}" title="Change Password {{ $user->name }}"><i class="fa fa-key"></i></a>
-												 <a class="btn btn-warning  btn-xs" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->name }}"><i class="fa fa-pencil"></i></a> 
-												 <a class="btn btn-danger  btn-xs" href="#" title="Delete {{ $user->name}}" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}"><i class="fa fa-trash"></i></a> 
-											</td> 
+											</td>              -->
+											<!-- <td class="text-center">{{ $user->created_at->format('d/m/Y H:i') }}</td>              -->
+											<td class="text-center">
+												 <!-- <a class="btn btn-default  btn-xs" href="{{ route('user.show', $user->id) }}" title="See {{ $user->name }}"><i class="fa fa-eye">   </i></a> -->
+												 <!-- <a class="btn btn-primary  btn-xs" href="{{ route('user.edit.password', $user->id) }}" title="Change Password {{ $user->name }}"><i class="fa fa-key"></i></a> -->
+												 <!-- <a class="btn btn-warning  btn-xs" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->name }}"><i class="fa fa-pencil"></i></a> 
+												 <a class="btn btn-danger  btn-xs" href="#" title="Delete {{ $user->name}}" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}"><i class="fa fa-trash"></i></a>  -->
+
+												 <a class="btn btn-success  btn-xs" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->name }}">Edit</a> 
+												 <a class="btn btn-danger  btn-xs" href="#" title="Delete {{ $user->name}}" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}">Delete</a> 
+											</td>
 										</tr>
 										<div class="modal fade" id="modal-delete-{{ $user->id }}">
 											<div class="modal-dialog">
@@ -83,10 +107,104 @@
 												</div>
 											</div>
 										</div>
+										<div class="modal fade" id="modal-invite">
+											<div class="modal-dialog" style="width: 700px;">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+														<h4 class="modal-title" style="text-align: center;">Invite New User</h4>
+													</div>
+													<div class="modal-body">
+														<form action="{{ route('user.store') }}" method="post">
+															{{ csrf_field() }}
+															<input type="hidden" name="active" value="1">
+															<div class="row">
+																<div class="col-lg-6">
+																	<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
+																		<label for="nome">Name</label>
+																		<input type="text" name="name" class="form-control" maxlength="30" minlength="4" placeholder="Name" required="" value="{{ old('name') }}" autofocus>
+																		@if($errors->has('name'))
+																			<span class="help-block">
+																				<strong>{{ $errors->first('name') }}</strong>
+																			</span>
+																		@endif
+																	</div>
+																</div>
+																<div class="col-lg-6">
+																	<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+																		<label for="nome">E-mail</label>
+																		<input type="email" name="email" class="form-control" placeholder="E-mail" required="" value="{{ old('email') }}">
+																		@if($errors->has('email'))
+																			<span class="help-block">
+																				<strong>{{ $errors->first('email') }}</strong>
+																			</span>
+																		@endif
+																	</div>
+																</div>
+																<div class="col-lg-6">
+																	<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+																		<label for="nome">Password</label>
+																		<input type="password" name="password" class="form-control" placeholder="Password" minlength="6" required="">
+																		@if($errors->has('password'))
+																			<span class="help-block">
+																				<strong>{{ $errors->first('password') }}</strong>
+																			</span>
+																		@endif
+																	</div>
+																</div>
+																<div class="col-lg-6">
+																	<div class="form-group {{ $errors->has('password-confirm') ? 'has-error' : '' }}">
+																		<label for="nome">Confirm Password</label>
+																		<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" minlength="6" required="">
+																		@if($errors->has('password-confirm'))
+																			<span class="help-block">
+																				<strong>{{ $errors->first('password-confirm') }}</strong>
+																			</span>
+																		@endif
+																	</div>
+																</div>
+																<div class="col-lg-12">
+																	<div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
+																		<label for="nome">Role</label>
+																		<select name="roles[]" class="form-control select2" data-placeholder="Permission Group" required="">
+																			@foreach($roles as $role)
+																				@if($role->id != 1)                                            
+																					<option value="{{ $role->id}}"> {{ $role->name}} </option>  
+																				@endif      
+																			@endforeach
+																		</select>
+																		@if($errors->has('roles'))
+																			<span class="help-block">
+																				<strong>{{ $errors->first('roles') }}</strong>
+																			</span>
+																		@endif
+																	</div>
+																</div>
+																<div class="col-lg-12">
+																	<div class="form-group">
+																		<label>Include a personalized message (optional)</label>
+																		<textarea name="message" class="form-control" rows="6"></textarea>
+																	</div>
+																</div> 
+																<div class="col-lg-12" style="text-align: center;">
+																	<button type="submit" class="btn btn-primary">Send Invintation</button>
+																</div>
+															</div>
+														</form>
+													</div>
+													<!-- <div class="modal-footer">
+														<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+														<a href="{{ route('user.destroy', $user->id) }}"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button></a>
+													</div> -->
+												</div>
+											</div>
+										</div>
 									@endif
 								@endforeach
 							</tbody>
-							<tfoot>
+							<!-- <tfoot>
 								<tr>		 
 									<th>Name</th>			 
 									<th>E-mail</th>
@@ -94,7 +212,7 @@
 									<th class="text-center">Created</th>			 
 									<th class="text-center">Actions</th>			 
 								</tr>
-							</tfoot>
+							</tfoot> -->
 						</table>
 					</div>
 				</div>				

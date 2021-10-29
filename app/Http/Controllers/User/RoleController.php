@@ -18,7 +18,9 @@ class RoleController extends Controller
 
         $roles = Role::paginate(15);
 
-        return view('users.roles.index', compact('roles'));
+        $permission_groups = PermissionGroup::all();
+
+        return view('users.roles.index', compact('roles', 'permission_groups'));
     }
 
     public function show($id)
@@ -52,6 +54,12 @@ class RoleController extends Controller
     {
         $this->authorize('create-role', Role::class);
 
+        // die(var_dump($request->all()));
+
+        $request->validate([
+            'name' => 'required|unique:roles',
+        ]);
+
         $role = Role::create($request->all());
 
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
@@ -60,7 +68,7 @@ class RoleController extends Controller
 
         $this->flashMessage('check', 'Permission successfully added!', 'success');
 
-        return redirect()->route('role.create');
+        return redirect()->route('role');
     }
 
     public function edit($id)
@@ -76,7 +84,7 @@ class RoleController extends Controller
 
         $permissions_ids = Permission::permissionsRole($role);
 
-        $permission_groups = PermissionGroup::all();                       
+        $permission_groups = PermissionGroup::all();
 
         return view('users.roles.edit',compact('role', 'permission_groups', 'permissions_ids'));
     }

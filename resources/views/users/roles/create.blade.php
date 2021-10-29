@@ -2,13 +2,13 @@
 
 @section('icon_page', 'plus')
 
-@section('title', 'Add Permission')
+@section('title', 'Add Role')
 
 @section('menu_pagina')	
 		
 	<li role="presentation">
 		<a href="{{ route('role') }}" class="link_menu_page">
-			<i class="fa fa-unlock-alt"></i> Permissions
+			<i class="fa fa-unlock-alt"></i> Roles
 		</a>								
 	</li>
 

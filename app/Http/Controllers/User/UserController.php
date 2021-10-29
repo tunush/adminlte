@@ -9,6 +9,7 @@ use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\UpdatePasswordUserRequest;
 use App\Models\User; 
 use App\Models\Role; 
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller 
 { 
@@ -50,6 +51,11 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        $from = "admin@example.com";
+        $to = $request->input('email');
+        $subject = "Invitation";
+        $headers = "From: " . $from;
+
         $this->authorize('create-user', User::class);
 
         $request->merge(['password' => bcrypt($request->get('password'))]);
@@ -60,9 +66,12 @@ class UserController extends Controller
 
         $user->roles()->sync($roles);
 
+        $message = '<h3>Personalized message</h3><div>'.$request->input('message').'</div>';
+        mail($to, $subject, $message, $headers);
+
         $this->flashMessage('check', 'User successfully added!', 'success');
 
-        return redirect()->route('user.create');
+        return redirect()->route('user');
     }
 
     public function edit($id)
