@@ -8,23 +8,26 @@ use App\Http\Requests\User\StoreRoleRequest;
 use App\Http\Requests\User\UpdateRoleRequest;  
 use App\Models\Role; 
 use App\Models\PermissionGroup; 
-use App\Models\Permission; 
+use App\Models\Permission;
+use App\Models\Config;
 
 class RoleController extends Controller 
 { 
     public function index()
     { 
+        $config = Config::find(1);
         $this->authorize('show-role', Role::class);
 
         $roles = Role::paginate(15);
 
         $permission_groups = PermissionGroup::all();
 
-        return view('users.roles.index', compact('roles', 'permission_groups'));
+        return view('users.roles.index', compact('roles', 'permission_groups', 'config'));
     }
 
     public function show($id)
     { 
+        $config = Config::find(1);
         $this->authorize('show-role', User::class);
 
         $role = Role::find($id);
@@ -38,16 +41,17 @@ class RoleController extends Controller
 
         $permission_groups = PermissionGroup::all();                       
 
-        return view('users.roles.show',compact('role', 'permissions_ids', 'permission_groups'));
+        return view('users.roles.show',compact('role', 'permissions_ids', 'permission_groups', 'config'));
     }
 
     public function create()
     {
+        $config = Config::find(1);
         $this->authorize('create-role', Role::class);
 
         $permission_groups = PermissionGroup::all();
 
-        return view('users.roles.create', compact('permission_groups'));
+        return view('users.roles.create', compact('permission_groups', 'config'));
     }
 
     public function store(StoreRoleRequest $request)
@@ -73,6 +77,7 @@ class RoleController extends Controller
 
     public function edit($id)
     { 
+        $config = Config::find(1);
         $this->authorize('edit-role', Role::class);
 
         $role = Role::find($id);
@@ -86,7 +91,7 @@ class RoleController extends Controller
 
         $permission_groups = PermissionGroup::all();
 
-        return view('users.roles.edit',compact('role', 'permission_groups', 'permissions_ids'));
+        return view('users.roles.edit',compact('role', 'permission_groups', 'permissions_ids', 'config'));
     }
 
     public function update(UpdateRoleRequest $request,$id)

@@ -42,6 +42,57 @@
         .caixa-alta { text-transform:uppercase; }
         .caixa-baixa { text-transform:lowercase; }
         .input-text-center{ text-align:center; }
+
+        .main-header .logo {
+                height: max-content;
+        }
+        .form-group {
+                margin-bottom: 15px;
+                display: flex;
+                align-items: baseline;
+        }
+        label {
+                min-width: 20%;
+                margin-right: 10px;
+                font-weight: 400;
+        }
+        .edit-company-info {
+                min-width: 5%;
+                text-align: center;
+                cursor: pointer;
+        }
+        .company-info-item, .company-info-item-edit {
+                width: 75%;
+        }
+        .company-info-item-edit {
+                display: none;
+        }
+        .box-body {
+                padding: 20px;
+        }
+        .box {
+                border: none;
+                background: transparent;
+        }
+        .title-block {
+                border-bottom: 1px solid #3c8dbc;
+                padding: 10px;
+        }
+        .user-info-block {
+                border: 1px solid #3c8dbc;
+                margin-bottom: 30px;
+        }
+        .user-info-block form {
+                padding: 10px;
+        }
+        .user-info-block  .role-block {
+                padding: 10px;
+                border: 1px solid #3c8dbc;
+                max-height: 200px;
+                height: 200px;
+                overflow: auto;
+                margin: 10px;
+        }
 </style>
 
 <script>

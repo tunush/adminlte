@@ -10,21 +10,24 @@ use App\Http\Requests\User\UpdatePasswordUserRequest;
 use App\Models\User; 
 use App\Models\Role; 
 use Illuminate\Support\Facades\Mail;
+use App\Models\Config;
 
 class UserController extends Controller 
 { 
     public function index()
     { 
+        $config = Config::find(1);
         $this->authorize('show-user', User::class);
 
         $users = User::paginate(15);
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users', 'config'));
     }
 
     public function show($id)
     { 
-    	$this->authorize('show-user', User::class);
+    	$config = Config::find(1);
+        $this->authorize('show-user', User::class);
 
     	$user = User::find($id);
 
@@ -37,16 +40,17 @@ class UserController extends Controller
 
 		$roles_ids = Role::rolesUser($user);      	               
 
-        return view('users.show',compact('user', 'roles', 'roles_ids'));
+        return view('users.show',compact('user', 'roles', 'roles_ids', 'config'));
     }
 
     public function create()
     {
+        $config = Config::find(1);
         $this->authorize('create-user', User::class);
 
         $roles = Role::all();
 
-        return view('users.create',compact('roles'));
+        return view('users.create',compact('roles', 'config'));
     }
 
     public function store(StoreUserRequest $request)
@@ -76,7 +80,8 @@ class UserController extends Controller
 
     public function edit($id)
     { 
-    	$this->authorize('edit-user', User::class);
+    	$config = Config::find(1);
+        $this->authorize('edit-user', User::class);
 
     	$user = User::find($id);
 
@@ -89,7 +94,7 @@ class UserController extends Controller
 
 		$roles_ids = Role::rolesUser($user);       	               
 
-        return view('users.edit',compact('user', 'roles', 'roles_ids'));
+        return view('users.edit',compact('user', 'roles', 'roles_ids', 'config'));
     }
 
     public function update(UpdateUserRequest $request,$id)

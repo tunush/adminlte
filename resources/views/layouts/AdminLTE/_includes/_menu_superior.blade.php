@@ -1,7 +1,8 @@
 <header class="main-header">
   <a href="{{ route('home') }}" class="logo">
-    <span class="logo-mini">{!! \App\Models\Config::find(1)->app_name_abv !!}</span>
-    <span class="logo-lg">{!! \App\Models\Config::find(1)->app_name !!}</span>
+    <!-- <span class="logo-mini">{!! \App\Models\Config::find(1)->app_name_abv !!}</span>
+    <span class="logo-lg">{!! \App\Models\Config::find(1)->app_name !!}</span> -->
+    <img src="{{ asset($config->caminho_img_login) }}" width="50px" class="img-thumbnail">
   </a>
   <nav class="navbar navbar-static-top">
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

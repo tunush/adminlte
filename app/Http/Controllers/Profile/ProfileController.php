@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Http\Requests\Profile\UpdateProfileRequest; 
 use App\Http\Requests\Profile\UpdatePasswordProfileRequest; 
 use App\Http\Requests\Profile\UpdateAvatarProfileRequest; 
-
+use App\Models\Config;
 
 class ProfileController extends Controller 
 { 
@@ -21,13 +21,15 @@ class ProfileController extends Controller
 
 	public function index() 
 	{ 
-		$user = Auth::user();
+		$config = Config::find(1);
+
+        $user = Auth::user();
 
 		$roles = Role::all();
 
 		$roles_ids = Role::rolesUser($user);
 
-		return view('profile.index',compact('user', 'roles', 'roles_ids'));
+		return view('profile.index',compact('user', 'roles', 'roles_ids', 'config'));
 	}
 
 	public function updateProfile(UpdateProfileRequest $request,$id)

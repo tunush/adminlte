@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Config;
 
 class PlaceHolderController extends Controller
 {
@@ -24,6 +25,7 @@ class PlaceHolderController extends Controller
      */
     public function index()
     {  
-        return view('place_holder');       
+        $config = Config::find(1);
+        return view('place_holder', compact('config'));       
     }
 }
