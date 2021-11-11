@@ -6,11 +6,11 @@
 
 @section('menu_pagina') 
         
-    <li role="presentation">
+    <!-- <li role="presentation">
         <a href="{{ route('role') }}" class="link_menu_page">
             <i class="fa fa-unlock-alt"></i> Roles
         </a>                                
-    </li>
+    </li> -->
 
 @endsection
 

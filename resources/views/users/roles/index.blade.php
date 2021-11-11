@@ -4,16 +4,18 @@
 
 @section('title', 'Roles')
 
+@section('description', 'Set job duties for each member with certain permissions')
+
 @section('menu_pagina')	
 		
-	<li role="presentation">
+	<!-- <li role="presentation"> -->
 		<!-- <a href="{{ route('role.create') }}" class="link_menu_page">
 			<i class="fa fa-plus"></i> New Role
 		</a> -->
-		<a href="#" class="link_menu_page" data-toggle="modal" data-target="#modal-create">
+		<!-- <a href="#" class="link_menu_page" data-toggle="modal" data-target="#modal-create">
 			<i class="fa fa-plus"></i> New Role
 		</a>
-	</li>
+	</li> -->
 	<!-- <li role="presentation">
 		<a href="{{ route('user') }}" class="link_menu_page">
 			<i class="fa fa-user"></i> Users
@@ -24,10 +26,13 @@
 
 @section('content')    
         
-    <div class="box box-primary">
+    <div class="roles-block">
 		<div class="box-body">
 			<div class="row">
-				<div class="col-md-12">	
+				<div class="col-md-12">
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#modal-create" style="margin-bottom: 20px;">
+						New Role
+					</a>
 					<div class="table-responsive">
 						<table id="tabelapadrao" class="table table-condensed table-bordered table-hover">
 							<thead>
@@ -150,17 +155,10 @@
 																	<div class="col-lg-12"><hr></div>
 																	<div class="col-lg-12">
 																		<div class="col-lg-2" style="padding-left: 0;"><label>Duties</label></div>
-																		<div class="col-lg-10" style="border: 1px solid black; padding: 10px 15px; max-height: 120px; overflow: auto;">
-																			<p>Descripiton of duties goes here.</p>
-																			<ol>
-																				<li>Review Training for VA Opener Call</li>
-																				<li>Call to qualify the seller</li>
-																				<li>On and On, blah blah and so on.</li>
-																				<li>On and On, blah blah and so on.</li>
-																				<li>On and On, blah blah and so on.</li>
-																			</ol>
+																		<div class="col-lg-10" style="padding: 0;">
+																			<textarea rows="6" name="duties" style="max-height: 120px; overflow: auto; padding: 10px 15px; width: 100%;"></textarea>
 																		</div>
-																	</div>         
+																	</div>
 																</div>
 																<div class="col-lg-12" style="margin-top: 15px;">
 																	<div class="col-lg-12"><hr></div>

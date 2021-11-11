@@ -14,7 +14,11 @@
             <div class="content-wrapper">
                 <nav class="navbar navbar-static-top" id="menu_sup_corpo" style="background-color:#d2d6de; margin-bottom:0; padding-bottom:0;navbar-header.a:color:#fff;">      
                     <div class="navbar-header">
-                        <a href="" class="navbar-brand" id="" style="color:#222d32;'"><i class="fa fa-@yield('icon_page')"></i> @yield('title')</a>
+                        <!-- <a href="" class="navbar-brand" id="" style="color:#222d32; float: none;"><i class="fa fa-@yield('icon_page')"></i> @yield('title')</a> -->
+                        <div style="font-size: 18px; padding: 15px 15px;">
+                            <a href="" style="color:#222d32; float: none;">@yield('title')</a>
+                            <div>@yield('description')</div>
+                        </div>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-2" aria-expanded="false">
                             <i class="fa fa-bars"></i>
                         </button>

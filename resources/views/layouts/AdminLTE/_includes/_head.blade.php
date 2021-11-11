@@ -60,12 +60,22 @@
                 min-width: 5%;
                 text-align: center;
                 cursor: pointer;
+                display: flex;
+                justify-content: center;
         }
         .company-info-item, .company-info-item-edit {
                 width: 75%;
         }
         .company-info-item-edit {
                 display: none;
+        }
+        .company-info {
+                border-bottom: 1px solid #3c8dbc;
+                border-left: 1px solid #3c8dbc;
+                border-right: 1px solid #3c8dbc;
+        }
+        .company-info .form-group {
+                margin: 15px 0;
         }
         .box-body {
                 padding: 20px;
@@ -92,6 +102,48 @@
                 height: 200px;
                 overflow: auto;
                 margin: 10px;
+        }
+        .users-block .table>thead:first-child>tr:first-child>th, 
+        .roles-block .table>thead:first-child>tr:first-child>th {
+                border-bottom: 1px solid #3c8dbc;
+        }
+        .users-block .table-bordered>thead>tr>th, .users-block .table-bordered>tbody>tr>th, 
+        .users-block .table-bordered>tfoot>tr>th, .users-block .table-bordered>thead>tr>td, 
+        .users-block .table-bordered>tbody>tr>td, .users-block .table-bordered>tfoot>tr>td,
+        .users-block .table-bordered, 
+        .roles-block .table-bordered>thead>tr>th, .roles-block .table-bordered>tbody>tr>th, 
+        .roles-block .table-bordered>tfoot>tr>th, .roles-block .table-bordered>thead>tr>td, 
+        .roles-block .table-bordered>tbody>tr>td, .roles-block .table-bordered>tfoot>tr>td,
+        .roles-block .table-bordered {
+                border: none;
+        }
+        .users-block .table-bordered>tbody>tr:first-child>td, 
+        .roles-block .table-bordered>tbody>tr:first-child>td {
+                padding-top: 10px;
+        }
+        .custom-fields-block, .default-fields-block {
+                margin-top: 60px;
+        }
+        .custom-fields-block .main-content, .default-fields-block .main-content {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+        }
+        .custom-fields-block .customizing-block, .default-fields-block .default-block {
+                border: 1px solid #3c8dbc;
+                width: 400px;
+                margin: 5px auto;
+                padding: 20px;
+                color: black;
+        }
+        .currency_input {
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='16px' width='85px'><text x='2' y='13' fill='gray' font-size='12' font-family='arial'>$</text></svg>");
+                background-repeat: no-repeat;
+                background-position-y: center;
+                background-position-x: 8px;
+                background-size: 110px;
+                padding-left: 28px;
         }
 </style>
 

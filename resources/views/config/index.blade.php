@@ -4,9 +4,11 @@
 
 @section('title', 'Company Profile')
 
+@section('description', 'Your company profile information will be used for various functionality within this CRM.')
+
 @section('content')
 	
-    <div class="box">
+    <div class="">
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12"> 
@@ -18,8 +20,8 @@
                                 <h4><b><i class="fa fa-fw fa-arrow-right"></i> General information</b></h4>
                                 <hr/>
                             </div> -->
-                            <div class="col-lg-12">
-                                <div class="form-group {{ $errors->has('app_name') ? 'has-error' : '' }}">
+                            <div class="col-lg-12" style="border: 1px solid #3c8dbc;">
+                                <div class="form-group {{ $errors->has('app_name') ? 'has-error' : '' }}" style="margin: 15px 0;">
                                     <label for="nome">Company Name</label>
                                     <div class="company-info-item">
                                         <strong>{{ $config->app_name }}</strong>
@@ -32,10 +34,14 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div class="edit-company-info"><i class="fa fa-edit"></i></div>
+                                    <div class="edit-company-info">
+                                        <i class="fa fa-check-square" style="margin-right: 5px; display: none;"></i>
+                                        <i class="fa fa-close" style="display: none;"></i>
+                                        <i class="fa fa-edit"></i>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 company-info">
                                 <div class="form-group">
                                     <label for="nome">Location</label>
                                     <div class="company-info-item">
@@ -44,10 +50,14 @@
                                     <div class="company-info-item-edit">
                                         <input type="text" name="location" class="form-control" placeholder="Location" value="{{$config->location}}">
                                     </div>
-                                    <div class="edit-company-info"><i class="fa fa-edit"></i></div>
+                                    <div class="edit-company-info">
+                                        <i class="fa fa-check-square" style="margin-right: 5px; display: none;"></i>
+                                        <i class="fa fa-close" style="display: none;"></i>
+                                        <i class="fa fa-edit"></i>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 company-info">
                                 <div class="form-group">
                                     <label for="nome">Main Phone</label>
                                     <div class="company-info-item">
@@ -56,10 +66,14 @@
                                     <div class="company-info-item-edit">
                                         <input type="text" name="main_phone" class="form-control" placeholder="Main Phone" value="{{$config->main_phone}}">
                                     </div>
-                                    <div class="edit-company-info"><i class="fa fa-edit"></i></div>
+                                    <div class="edit-company-info">
+                                        <i class="fa fa-check-square" style="margin-right: 5px; display: none;"></i>
+                                        <i class="fa fa-close" style="display: none;"></i>
+                                        <i class="fa fa-edit"></i>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 company-info">
                                 <div class="form-group">
                                     <label for="nome">Main Email</label>
                                     <div class="company-info-item">
@@ -68,7 +82,11 @@
                                     <div class="company-info-item-edit">
                                         <input type="text" name="main_email" class="form-control" placeholder="Main Email" value="{{$config->main_email}}">
                                     </div>
-                                    <div class="edit-company-info"><i class="fa fa-edit"></i></div>
+                                    <div class="edit-company-info">
+                                        <i class="fa fa-check-square" style="margin-right: 5px; display: none;"></i>
+                                        <i class="fa fa-close" style="display: none;"></i>
+                                        <i class="fa fa-edit"></i>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="col-lg-2">
@@ -187,47 +205,55 @@
                                     @endif
                                 </div>
                             </div> -->
-                            <div class="col-lg-12 form-group">
-                                <label>Favicon</label>
-                                <div class="company-info-item">
-                                    <img src="{{ asset($config->favicon) }}" width="30px" class="img-thumbnail">
-                                </div>
-                                <div class="company-info-item-edit">
-                                    <div><img src="{{ asset($config->favicon) }}" width="30px" class="img-thumbnail"></div>
-                                    <div>
-                                        <div class="form-group {{ $errors->has('favicon') ? 'has-error' : '' }}" style="margin-top: 15px;">
-                                            <input type="file"  class="form-control-file" name="favicon">
-                                            @if($errors->has('favicon'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('favicon') }}</strong>
-                                                </span>
-                                            @endif
+                            <div class="col-lg-12 company-info">
+                                <div class="form-group">
+                                    <label>Favicon</label>
+                                    <div class="company-info-item">
+                                        <img src="{{ asset($config->favicon) }}" width="30px" class="img-thumbnail">
+                                    </div>
+                                    <div class="company-info-item-edit">
+                                        <div>
+                                            <div class="form-group {{ $errors->has('favicon') ? 'has-error' : '' }}" style="margin-top: 15px;">
+                                                <input type="file"  class="form-control-file" name="favicon">
+                                                @if($errors->has('favicon'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('favicon') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="edit-company-info">
+                                        <i class="fa fa-check-square" style="margin-right: 5px; display: none;"></i>
+                                        <i class="fa fa-close" style="display: none;"></i>
+                                        <i class="fa fa-edit"></i>
+                                    </div>
                                 </div>
-                                <div class="edit-company-info"><i class="fa fa-edit"></i></div>
-                                <br>
                             </div>
-                            <div class="col-lg-12 form-group">
-                                <label>Logo</label>
-                                <div class="company-info-item">
-                                    <img src="{{ asset($config->caminho_img_login) }}" width="100px" class="img-thumbnail">
-                                </div>
-                                <div class="company-info-item-edit">
-                                    <div><img src="{{ asset($config->caminho_img_login) }}" width="100px" class="img-thumbnail"></div>
-                                    <div>
-                                        <div class="form-group {{ $errors->has('caminho_img_login') ? 'has-error' : '' }}" style="margin-top: 15px;">
-                                            <input type="file" class="form-control-file"  name="caminho_img_login">
-                                            @if($errors->has('caminho_img_login'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('caminho_img_login') }}</strong>
-                                                </span>
-                                            @endif
+                            <div class="col-lg-12 company-info">
+                                <div class="form-group">
+                                    <label>Logo</label>
+                                    <div class="company-info-item">
+                                        <img src="{{ asset($config->caminho_img_login) }}" width="100px" class="img-thumbnail">
+                                    </div>
+                                    <div class="company-info-item-edit">
+                                        <div>
+                                            <div class="form-group {{ $errors->has('caminho_img_login') ? 'has-error' : '' }}" style="margin-top: 15px;">
+                                                <input type="file" class="form-control-file" name="caminho_img_login" accept="image/png, image/jpeg">
+                                                @if($errors->has('caminho_img_login'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('caminho_img_login') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="edit-company-info">
+                                        <i class="fa fa-check-square" style="margin-right: 5px; display: none;"></i>
+                                        <i class="fa fa-close" style="display: none;"></i>
+                                        <i class="fa fa-edit"></i>
+                                    </div>
                                 </div>
-                                <div class="edit-company-info"><i class="fa fa-edit"></i></div>
-                                <br>
                             </div>
 
                             <!-- <div class="col-lg-12">
@@ -282,28 +308,22 @@
     </div>
 
     <script>
-        $(".edit-company-info").click(function() {
-            if($(this).html().indexOf('fa-close') !== -1) {
-                $(this).parent().find('.company-info-item-edit').css('display', 'none');
-                $(this).parent().find('.company-info-item').css('display', 'block');
-                $(this).html('<i class="fa fa-edit"></i>');
-                
-                let all_icons = $(".edit-company-info");
-                let flag = false;
-                for(let i = 0; i < all_icons.length; i++) {
-                    if(all_icons[i].innerHTML.indexOf('fa-close') !== -1) {
-                        flag = true;
-                    }
-                }
-                if(!flag) {
-                    $('.save-button').css('display', 'none');
-                }
-            } else {
-                $(this).parent().find('.company-info-item-edit').css('display', 'block');
-                $(this).parent().find('.company-info-item').css('display', 'none');
-                $(this).html('<i class="fa fa-close"></i>');
-                $('.save-button').css('display', 'block');
-            }
+        $(".edit-company-info i.fa-edit").click(function() {
+            $(this).css('display', 'none');
+            $(this).parent().parent().find('.company-info-item-edit').css('display', 'block');
+            $(this).parent().parent().find('.company-info-item').css('display', 'none');
+            $(this).parent().find('i.fa-close').css('display', 'block');
+            $(this).parent().find('i.fa-check-square').css('display', 'block');
+        });
+        $(".edit-company-info i.fa-close").click(function() {
+            $(this).css('display', 'none');
+            $(this).parent().find('i.fa-check-square').css('display', 'none');
+            $(this).parent().parent().find('.company-info-item-edit').css('display', 'none');
+            $(this).parent().parent().find('.company-info-item').css('display', 'block');
+            $(this).parent().find('i.fa-edit').css('display', 'block');
+        });
+        $('.edit-company-info i.fa-check-square').click(function() {
+            $('.save-button button').click();
         });
     </script>
 @endsection

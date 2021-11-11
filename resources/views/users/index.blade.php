@@ -4,13 +4,15 @@
 
 @section('title', 'Users')
 
+@section('description', 'You can invite people that you work with (eg. partners, VA\'s, or team members) to join.')
+
 @section('menu_pagina')	
 		
-	<li role="presentation">
+	<!-- <li role="presentation">
 		<a href="#" class="link_menu_page" data-toggle="modal" data-target="#modal-invite">
 			<i class="fa fa-plus"></i> Invite Someone
 		</a>								
-	</li>
+	</li> -->
 
 	<!-- <li role="presentation">
 		<a href="{{ route('user.create') }}" class="link_menu_page">
@@ -27,10 +29,13 @@
 
 @section('content')    
         
-    <div class="box box-primary">
+    <div class="users-block">
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12">	
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#modal-invite" style="margin-bottom: 20px;">
+						Invite Someone
+					</a>
 					<div class="table-responsive">
 						<table id="tabelapadrao" class="table table-condensed table-bordered table-hover">
 							<thead>
@@ -121,7 +126,7 @@
 															{{ csrf_field() }}
 															<input type="hidden" name="active" value="1">
 															<div class="row">
-																<div class="col-lg-6">
+																<div class="col-lg-12">
 																	<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 																		<label for="nome">Name</label>
 																		<input type="text" name="name" class="form-control" maxlength="30" minlength="4" placeholder="Name" required="" value="{{ old('name') }}" autofocus>
@@ -132,7 +137,7 @@
 																		@endif
 																	</div>
 																</div>
-																<div class="col-lg-6">
+																<div class="col-lg-12">
 																	<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 																		<label for="nome">E-mail</label>
 																		<input type="email" name="email" class="form-control" placeholder="E-mail" required="" value="{{ old('email') }}">
@@ -143,7 +148,7 @@
 																		@endif
 																	</div>
 																</div>
-																<div class="col-lg-6">
+																<!-- <div class="col-lg-6">
 																	<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
 																		<label for="nome">Password</label>
 																		<input type="password" name="password" class="form-control" placeholder="Password" minlength="6" required="">
@@ -164,7 +169,7 @@
 																			</span>
 																		@endif
 																	</div>
-																</div>
+																</div> -->
 																<div class="col-lg-12">
 																	<div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
 																		<label for="nome">Role</label>
@@ -183,7 +188,7 @@
 																	</div>
 																</div>
 																<div class="col-lg-12">
-																	<div class="form-group">
+																	<div class="form-group" style="display: block;">
 																		<label>Include a personalized message (optional)</label>
 																		<textarea name="message" class="form-control" rows="6"></textarea>
 																	</div>

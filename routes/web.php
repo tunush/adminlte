@@ -25,7 +25,6 @@ Route::get('/contacts', 'App\Http\Controllers\PlaceHolderController@index')->nam
 Route::get('/reporting', 'App\Http\Controllers\PlaceHolderController@index')->name('reporting');
 Route::get('/call_scripts', 'App\Http\Controllers\PlaceHolderController@index')->name('call_scripts');
 
-Route::get('/custom_fields', 'App\Http\Controllers\PlaceHolderController@index')->name('custom_fields');
 Route::get('/default_fields', 'App\Http\Controllers\PlaceHolderController@index')->name('default_fields');
 Route::get('/smtp', 'App\Http\Controllers\PlaceHolderController@index')->name('smtp');
 Route::get('/phone', 'App\Http\Controllers\PlaceHolderController@index')->name('phone');
@@ -65,4 +64,33 @@ Route::group(['namespace' => 'App\Http\Controllers\User'], function (){
 	Route::put('/role/update/{id}', 'RoleController@update')->name('role.update');
 	Route::get('/role/show/{id}', 'RoleController@show')->name('role.show');
 	Route::get('/role/destroy/{id}', 'RoleController@destroy')->name('role.destroy');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\CustomFields'], function (){ 
+	Route::get('/custom_fields', 'CustomFieldsController@index')->name('custom_fields');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\DefaultFields'], function (){ 
+	Route::get('/default_fields', 'SellerLeadsDefaultFieldsController@index')->name('default_fields');
+
+	Route::get('/seller_leads_default_fields', 'SellerLeadsDefaultFieldsController@show')->name('seller_leads_default_fields');
+	Route::post('/store_seller_leads_default_fields', 'SellerLeadsDefaultFieldsController@store')->name('store_seller_leads_default_fields');
+	Route::get('/seller_leads_default_fields/destroy/{id}', 'SellerLeadsDefaultFieldsController@destroy')->name('seller_leads_default_fields.destroy');
+	Route::post('/seller_leads_default_fields/update/{id}', 'SellerLeadsDefaultFieldsController@update')->name('seller_leads_default_fields.update');
+	Route::post('/seller_leads_default_fields/updateValue/{id}', 'SellerLeadsDefaultFieldsController@updateValue')->name('seller_leads_default_fields.updateValue');
+	Route::post('/seller_leads_default_fields/updateDefaultOptions/{id}', 'SellerLeadsDefaultFieldsController@updateDefaultOptions')->name('seller_leads_default_fields.updateDefaultOptions');
+
+	Route::get('/buyer_leads_default_fields', 'BuyerLeadsDefaultFieldsController@show')->name('buyer_leads_default_fields');
+	Route::post('/store_buyer_leads_default_fields', 'BuyerLeadsDefaultFieldsController@store')->name('store_buyer_leads_default_fields');
+	Route::get('/buyer_leads_default_fields/destroy/{id}', 'BuyerLeadsDefaultFieldsController@destroy')->name('buyer_leads_default_fields.destroy');
+	Route::post('/buyer_leads_default_fields/update/{id}', 'BuyerLeadsDefaultFieldsController@update')->name('buyer_leads_default_fields.update');
+	Route::post('/buyer_leads_default_fields/updateValue/{id}', 'BuyerLeadsDefaultFieldsController@updateValue')->name('buyer_leads_default_fields.updateValue');
+	Route::post('/buyer_leads_default_fields/updateDefaultOptions/{id}', 'BuyerLeadsDefaultFieldsController@updateDefaultOptions')->name('buyer_leads_default_fields.updateDefaultOptions');
+
+	Route::get('/contact_default_fields', 'ContactDefaultFieldsController@show')->name('contact_default_fields');
+	Route::post('/store_contact_default_fields', 'ContactDefaultFieldsController@store')->name('store_contact_default_fields');
+	Route::get('/contact_default_fields/destroy/{id}', 'ContactDefaultFieldsController@destroy')->name('contact_default_fields.destroy');
+	Route::post('/contact_default_fields/update/{id}', 'ContactDefaultFieldsController@update')->name('contact_default_fields.update');
+	Route::post('/contact_default_fields/updateValue/{id}', 'ContactDefaultFieldsController@updateValue')->name('contact_default_fields.updateValue');
+	Route::post('/contact_default_fields/updateDefaultOptions/{id}', 'ContactDefaultFieldsController@updateDefaultOptions')->name('contact_default_fields.updateDefaultOptions');
 });

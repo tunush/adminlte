@@ -9,7 +9,7 @@ use App\Models\User;
 class Role extends Model
 {
 	protected $fillable = [
-        'name', 'label', 
+        'name', 'label', 'duties'
     ];
 
     public function permissions()

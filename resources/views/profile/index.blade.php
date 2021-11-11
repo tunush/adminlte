@@ -4,6 +4,8 @@
 
 @section('title', 'User Profile') 
 
+@section('description', 'This is your individual profile and settings')
+
 @section('content') 
 
 <div class="row">
@@ -93,15 +95,7 @@
                 @if(in_array($role->id, $roles_ids))
                     <div style="padding: 10px;"><span><strong>ROLE: {{ $role->name }}</strong></span></div>
                     <div class="role-block">
-                        <div style="margin-bottom: 10px;">Descripiton of duties goes here.</div>
-                        @php
-                            $duties = json_decode($role->duties, true);
-                        @endphp
-                        <ol style="padding-left: 15px;">
-                            @foreach($duties as $d)
-                                <li>{{ $d }}</li>
-                            @endforeach
-                        </ol>
+                        <pre style="background: transparent; border: none;">{{$role->duties}}</pre>
                     </div>
                 @endif
             @endforeach
@@ -164,7 +158,7 @@
                     </p>
                 </div>
                 <div class="form-group text-right" style="margin: 10px 0; justify-content: end;">
-                    <button type="submit" class="btn btn-primary">Update Voicemail</button>
+                    <button type="button" class="btn btn-primary">Update Voicemail</button>
                 </div>
             </div>      
 		</div>
