@@ -12,15 +12,15 @@ or remove any field and place it where it makes sense for you.')
     <div class="col-lg-12 custom-fields-block">
       <div class="main-content">
         <p>To get started, select which details page you like to customize</p>
-        <div class="customizing-block">
+        <a href="{{ route('seller_leads_custom_fields') }}" class="customizing-block">
           <span>Seller Leads / Properties</span>
-        </div>
-        <div class="customizing-block">
+        </a>
+        <a href="{{ route('buyer_leads_custom_fields') }}" class="customizing-block">
           <span>Buyer Leads / Buyer Details</span>
-        </div>
-        <div class="customizing-block">
+        </a>
+        <a href="{{ route('contact_custom_fields') }}" class="customizing-block">
           <span>Contact Details</span>
-        </div>
+        </a>
       </div>
     </div>
   </div>
