@@ -79,14 +79,22 @@ Route::group(['namespace' => 'App\Http\Controllers\CustomFields'], function (){
 	Route::get('/seller_leads_custom_fields/destroy/{id}', 'SellerLeadsCustomFieldsController@destroy')->name('seller_leads_custom_fields.destroy');
 	Route::post('/seller_leads_custom_fields/update/{id}', 'SellerLeadsCustomFieldsController@update')->name('seller_leads_custom_fields.update');
 	Route::post('/seller_leads_custom_fields/updateValue/{id}', 'SellerLeadsCustomFieldsController@updateValue')->name('seller_leads_custom_fields.updateValue');
+	Route::post('/seller_leads_custom_fields/updateDefaultOptions/{id}', 'SellerLeadsCustomFieldsController@updateDefaultOptions')->name('seller_leads_custom_fields.updateDefaultOptions');
 	Route::post('/seller_leads_custom_fields/updateCustomOptions/{id}', 'SellerLeadsCustomFieldsController@updateCustomOptions')->name('seller_leads_custom_fields.updateCustomOptions');
 
-	// Route::get('/buyer_leads_custom_fields', 'BuyerLeadsCustomFieldsController@show')->name('buyer_leads_custom_fields');
-	// Route::post('/store_buyer_leads_custom_fields', 'BuyerLeadsCustomFieldsController@store')->name('store_buyer_leads_custom_fields');
-	// Route::get('/buyer_leads_custom_fields/destroy/{id}', 'BuyerLeadsCustomFieldsController@destroy')->name('buyer_leads_custom_fields.destroy');
-	// Route::post('/buyer_leads_custom_fields/update/{id}', 'BuyerLeadsCustomFieldsController@update')->name('buyer_leads_custom_fields.update');
-	// Route::post('/buyer_leads_custom_fields/updateValue/{id}', 'BuyerLeadsCustomFieldsController@updateValue')->name('buyer_leads_custom_fields.updateValue');
-	// Route::post('/buyer_leads_custom_fields/updateCustomOptions/{id}', 'BuyerLeadsCustomFieldsController@updateCustomOptions')->name('buyer_leads_custom_fields.updateCustomOptions');
+
+	Route::get('/buyer_leads_custom_fields', 'BuyerLeadsCustomFieldsController@show')->name('buyer_leads_custom_fields');
+	Route::post('/buyer_leads_custom_fields/update-order','BuyerLeadsCustomFieldsController@updateOrder');
+	Route::post('/buyer_leads_custom_section/update/{id}', 'BuyerLeadsCustomFieldsController@updateSection')->name('buyer_leads_custom_section.update');
+	Route::post('/add_buyer_leads_custom_section', 'BuyerLeadsCustomFieldsController@addSection')->name('buyer_leads_custom_section.add');
+	Route::get('/buyer_leads_custom_section/destroy/{id}', 'BuyerLeadsCustomFieldsController@destroySection')->name('buyer_leads_custom_section.destroy');
+
+	Route::post('/store_buyer_leads_custom_fields/{id}', 'BuyerLeadsCustomFieldsController@store')->name('store_buyer_leads_custom_fields');
+	Route::get('/buyer_leads_custom_fields/destroy/{id}', 'BuyerLeadsCustomFieldsController@destroy')->name('buyer_leads_custom_fields.destroy');
+	Route::post('/buyer_leads_custom_fields/update/{id}', 'BuyerLeadsCustomFieldsController@update')->name('buyer_leads_custom_fields.update');
+	Route::post('/buyer_leads_custom_fields/updateValue/{id}', 'BuyerLeadsCustomFieldsController@updateValue')->name('buyer_leads_custom_fields.updateValue');
+	Route::post('/buyer_leads_custom_fields/updateDefaultOptions/{id}', 'BuyerLeadsCustomFieldsController@updateDefaultOptions')->name('buyer_leads_custom_fields.updateDefaultOptions');
+	Route::post('/buyer_leads_custom_fields/updateCustomOptions/{id}', 'BuyerLeadsCustomFieldsController@updateCustomOptions')->name('buyer_leads_custom_fields.updateCustomOptions');
 
 	// Route::get('/contact_custom_fields', 'ContactCustomFieldsController@show')->name('contact_custom_fields');
 	// Route::post('/store_contact_custom_fields', 'ContactCustomFieldsController@store')->name('store_contact_custom_fields');
