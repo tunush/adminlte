@@ -27,12 +27,18 @@ Route::get('/call_scripts', 'App\Http\Controllers\PlaceHolderController@index')-
 
 Route::get('/default_fields', 'App\Http\Controllers\PlaceHolderController@index')->name('default_fields');
 Route::get('/smtp', 'App\Http\Controllers\PlaceHolderController@index')->name('smtp');
-Route::get('/phone', 'App\Http\Controllers\PlaceHolderController@index')->name('phone');
 Route::get('/workflow', 'App\Http\Controllers\PlaceHolderController@index')->name('workflow');
 Route::get('/calendars', 'App\Http\Controllers\PlaceHolderController@index')->name('calendars');
 
 Route::get('/config', 'App\Http\Controllers\ConfigController@index')->name('config');
 Route::put('/config/update/{id}', 'App\Http\Controllers\ConfigController@update')->name('config.update');
+
+Route::group(['namespace' => 'App\Http\Controllers\Phone'], function (){ 
+	Route::get('/phone', 'PhoneController@index')->name('phone');
+	Route::post('/phone/update/settings/{id}', 'PhoneController@updateSettings')->name('phone.update.settings');
+	Route::post('/phone/update/{id}', 'PhoneController@update')->name('phone.update');
+	Route::get('/phone/destroy/{id}', 'PhoneController@destroy')->name('phone.destroy');
+});
 
 Route::group(['namespace' => 'App\Http\Controllers\Profile'], function (){ 
 	Route::get('/profile', 'ProfileController@index')->name('profile');
@@ -96,12 +102,19 @@ Route::group(['namespace' => 'App\Http\Controllers\CustomFields'], function (){
 	Route::post('/buyer_leads_custom_fields/updateDefaultOptions/{id}', 'BuyerLeadsCustomFieldsController@updateDefaultOptions')->name('buyer_leads_custom_fields.updateDefaultOptions');
 	Route::post('/buyer_leads_custom_fields/updateCustomOptions/{id}', 'BuyerLeadsCustomFieldsController@updateCustomOptions')->name('buyer_leads_custom_fields.updateCustomOptions');
 
-	// Route::get('/contact_custom_fields', 'ContactCustomFieldsController@show')->name('contact_custom_fields');
-	// Route::post('/store_contact_custom_fields', 'ContactCustomFieldsController@store')->name('store_contact_custom_fields');
-	// Route::get('/contact_custom_fields/destroy/{id}', 'ContactCustomFieldsController@destroy')->name('contact_custom_fields.destroy');
-	// Route::post('/contact_custom_fields/update/{id}', 'ContactCustomFieldsController@update')->name('contact_custom_fields.update');
-	// Route::post('/contact_custom_fields/updateValue/{id}', 'ContactCustomFieldsController@updateValue')->name('contact_custom_fields.updateValue');
-	// Route::post('/contact_custom_fields/updateCustomOptions/{id}', 'ContactCustomFieldsController@updateCustomOptions')->name('contact_custom_fields.updateCustomOptions');
+
+	Route::get('/contact_custom_fields', 'ContactCustomFieldsController@show')->name('contact_custom_fields');
+	Route::post('/contact_custom_fields/update-order','ContactCustomFieldsController@updateOrder');
+	Route::post('/contact_custom_section/update/{id}', 'ContactCustomFieldsController@updateSection')->name('contact_custom_section.update');
+	Route::post('/contact_custom_section', 'ContactCustomFieldsController@addSection')->name('contact_custom_section.add');
+	Route::get('/contact_custom_section/destroy/{id}', 'ContactCustomFieldsController@destroySection')->name('contact_custom_section.destroy');
+
+	Route::post('/store_contact_custom_fields{id}', 'ContactCustomFieldsController@store')->name('store_contact_custom_fields');
+	Route::get('/contact_custom_fields/destroy/{id}', 'ContactCustomFieldsController@destroy')->name('contact_custom_fields.destroy');
+	Route::post('/contact_custom_fields/update/{id}', 'ContactCustomFieldsController@update')->name('contact_custom_fields.update');
+	Route::post('/contact_custom_fields/updateValue/{id}', 'ContactCustomFieldsController@updateValue')->name('contact_custom_fields.updateValue');
+	Route::post('/contact_custom_fields/updateDefaultOptions/{id}', 'ContactCustomFieldsController@updateDefaultOptions')->name('contact_custom_fields.updateDefaultOptions');
+	Route::post('/contact_custom_fields/updateCustomOptions/{id}', 'ContactCustomFieldsController@updateCustomOptions')->name('contact_custom_fields.updateCustomOptions');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\DefaultFields'], function (){ 

@@ -52,10 +52,13 @@ class BuyerLeadsCustomFieldsController extends Controller
 
 	public function updateSection(StoreRoleRequest $request, $id)
     {
-        // dd($request->all());
+        if(!$request->has('full')) {
+            $result = array_merge($request->all(), ['full' => '0']);
+        } else $result = $request->all();
+
         $section = BuyerLeadsCustomSections::find($id);
 
-        $section->update($request->all());
+        $section->update($result);
 
         $this->flashMessage('check', 'Section successfully updated!', 'success');
 
@@ -63,8 +66,12 @@ class BuyerLeadsCustomFieldsController extends Controller
     }
 
 	public function addSection(StoreRoleRequest $request) {
+        if(!$request->has('full')) {
+            $result = array_merge($request->all(), ['full' => '0']);
+        } else $result = $request->all();
+        
         $config = Config::find(1);
-        $section = BuyerLeadsCustomSections::create($request->all());
+        $section = BuyerLeadsCustomSections::create($result);
 
         $this->flashMessage('check', 'Section successfully added!', 'success');
 

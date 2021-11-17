@@ -2,7 +2,7 @@
 
 @section('icon_page', '')
 
-@section('title', 'Customizing Default Fields > Buyer Leads / Buyer Details')
+@section('title', 'Customizing Default Fields > Buyer Leads/Buyer Details')
 
 @section('menu_pagina')	
 @endsection

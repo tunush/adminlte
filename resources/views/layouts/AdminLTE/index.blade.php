@@ -54,7 +54,7 @@
 
             </div>
 
-            @include('layouts.AdminLTE._includes._footer')
+            <!-- @include('layouts.AdminLTE._includes._footer') -->
 
         </div>       
 

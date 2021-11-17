@@ -43,6 +43,10 @@
         .caixa-baixa { text-transform:lowercase; }
         .input-text-center{ text-align:center; }
 
+        .main-header .navbar a:hover {
+                background: transparent !important;
+        }
+
         .main-header .logo {
                 height: max-content;
         }

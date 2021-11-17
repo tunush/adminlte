@@ -61,26 +61,26 @@
                                             <label>{{$def_field->label}}</label>
                                             @if($def_field->type == 'Textbox')
                                                 <input type="text" name="value" class="form-control" value="{{ $def_field->value }}">
-                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
-                                                <a href="#" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
+                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
+                                                <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                                 <a href="{{ route('seller_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Date Textbox')
                                                 <input type="date" name="value" class="form-control" value="{{ $def_field->value }}">
-                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
-                                                <a href="#" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
+                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
+                                                <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                                 <a href="{{ route('seller_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Large Textbox')
                                                 <textarea name="value" class="form-control" rows="6">{{ $def_field->value }}</textarea>
-                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
-                                                <a href="#" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
+                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
+                                                <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                                 <a href="{{ route('seller_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Currency Textbox')
                                                 <input type="text" name="value" class="form-control currency_input" value="{{ $def_field->value }}">
-                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
-                                                <a href="#" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
+                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
+                                                <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                                 <a href="{{ route('seller_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Yes/No Dropdown')
@@ -88,8 +88,8 @@
                                                     <option>Yes</option>
                                                     <option>No</option>
                                                 </select>
-                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
-                                                <a href="#" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
+                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
+                                                <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                                 <a href="{{ route('seller_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
 
                                                 <script>
@@ -116,8 +116,8 @@
                                                 <div style="width: 40px;" class="form-control">
                                                     <a href="#" data-toggle="modal" data-target="#modal-custom-options-{{ $field->id }}" style="color: black;"><i class="fa fa-gear"></i></a>
                                                 </div>
-                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
-                                                <a href="#" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
+                                                <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
+                                                <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                                 <a href="{{ route('seller_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
 
                                                 <script>

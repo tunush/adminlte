@@ -3,7 +3,7 @@
 		<ul class="sidebar-menu" data-widget="tree">
 			<!-- <li class="header" style="color:#fff;"> MAIN MENU <i class="fa fa-level-down"></i></li>   -->
 			<li class="{{ Request::segment(1) === 'profile' ? 'active' : null }}">
-				<a href="{{ route('profile') }}" title="{{ Auth::user()->name }}"><i class="fa fa-user"></i> <span>{{ Auth::user()->name }}</span></a>
+				<a href="{{ route('profile') }}" title="{{ Auth::user()->name }}" style="border-bottom: 1px solid #d2d6de;"><i class="fa fa-user"></i> <span>{{ Auth::user()->name }}</span></a>
 			</li>
 			@if (Auth::user()->can('dashboard', ''))
 				<li class="
@@ -122,7 +122,6 @@
 				{{ Request::segment(1) === 'user' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'role' ? 'active menu-open' : null }}
 
-				{{ Request::segment(1) === 'profile' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'custom_fields' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'default_fields' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'smtp' ? 'active menu-open' : null }}

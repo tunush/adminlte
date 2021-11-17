@@ -9,7 +9,13 @@
       <span class="sr-only">Toggle navigation</span>
     </a>
     <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">          
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#" style="padding: 13px 15px 7px 15px;"><i class="fa fa-mobile" style="color: white; font-size: 28px;"></i></a>
+        </li>
+        <li>
+          <a href="/phone" style="padding: 15px 15px 7px 15px;"><i class="fa fa-phone" style="color: white; font-size: 24px;"></i></a>
+        </li>
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             @if(file_exists(Auth::user()->avatar))
@@ -18,9 +24,9 @@
               <img src="{{ asset('public/img/config/nopic.png') }}" class="user-image">
             @endif            
             <span class="hidden-xs">
-            @if(Auth::user('name'))
+            <!-- @if(Auth::user('name'))
               {{ Auth::user()->name }}
-            @endif
+            @endif -->
             </span>
           </a>
           <ul class="dropdown-menu">

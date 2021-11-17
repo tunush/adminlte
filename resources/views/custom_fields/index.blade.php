@@ -18,7 +18,7 @@ or remove any field and place it where it makes sense for you.')
         <a href="{{ route('buyer_leads_custom_fields') }}" class="customizing-block">
           <span>Buyer Leads / Buyer Details</span>
         </a>
-        <a href="" class="customizing-block">
+        <a href="{{ route('contact_custom_fields') }}" class="customizing-block">
           <span>Contact Details</span>
         </a>
       </div>
