@@ -12,11 +12,15 @@ class ConfigController extends Controller
 {    
     public function index()
     {
-        $config = Config::find(1);
+		if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] !== 0) {
+			$config = Config::find($_COOKIE["company_id"]);
 
-        $this->authorize('root-dev', $config);
-           	
-    	return view('config.index',compact('config'));
+			$this->authorize('root-dev', $config);
+				
+			return view('config.index',compact('config'));
+		} else {
+			return view('config.index');
+		}
     }
 
     public function update(ConfigRequest $request, $id)

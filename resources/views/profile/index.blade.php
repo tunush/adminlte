@@ -131,35 +131,60 @@
             </form>
         </div>
         <div class="user-info-block">
+            @php
+                $phones = App\Models\TwilloNumbers::where('assigned_user', Auth::user()->id)->get();
+            @endphp
             <div class="title-block">Call & Voicemail Settings</div>
             <div style="padding: 10px;">
                 <div>
                     <label>Inbound Twilio</label>
-                    <select class="form-control" style="width: 50%;">
-                        <option>AR - 1234</option>
-                        <option>AR - 1234</option>
-                        <option>AR - 1234</option>
+                    <select class="form-control phones-list" style="width: 50%;">
+                        @foreach($phones as $phone)
+                            <option value="{{$phone->id}}">{{$phone->name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <p style="margin: 10px 0;">
                     This voicemail message will be played instead of the one by phone carrier. We recommend a timeout of 20 seconds or less
                 </p>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="width: 50%; margin-right: 20px;">
-                        <label>Incoming Call</label>
-                        <select class="form-control">
-                            <option>No Timeout</option>
-                            <option>10 Seconds</option>
-                            <option>20 Seconds</option>
-                        </select>
+                @if(count($phones) !== 0)
+                    <form class="phone-update-timeout" action="{{ route('phone.update', $phones[0]->id) }}" method="post" style="margin: 0; padding: 0;">
+                        {{ csrf_field() }}
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="width: 50%; margin-right: 20px;">
+                                <label>Incoming Call</label>
+                                <select name="incoming_call_timeout" class="form-control">
+                                    <option value="">No Timeout</option>
+                                    <option value="10s">10 Seconds</option>
+                                    <option value="20s">20 Seconds</option>
+                                </select>
+                            </div>
+                            <p>
+                                We will record a voicemail if call isn't answered before this duratio
+                            </p>
+                        </div>
+                        <div class="form-group text-right" style="margin: 10px 0; justify-content: end;">
+                            <button type="sumbit" class="btn btn-primary">Update Voicemail</button>
+                        </div>
+                    </form>
+                @else
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="width: 50%; margin-right: 20px;">
+                            <label>Incoming Call</label>
+                            <select name="incoming_call_timeout" class="form-control">
+                                <option value="">No Timeout</option>
+                                <option value="10s">10 Seconds</option>
+                                <option value="20s">20 Seconds</option>
+                            </select>
+                        </div>
+                        <p>
+                            We will record a voicemail if call isn't answered before this duratio
+                        </p>
                     </div>
-                    <p>
-                        We will record a voicemail if call isn't answered before this duratio
-                    </p>
-                </div>
-                <div class="form-group text-right" style="margin: 10px 0; justify-content: end;">
-                    <button type="button" class="btn btn-primary">Update Voicemail</button>
-                </div>
+                    <div class="form-group text-right" style="margin: 10px 0; justify-content: end;">
+                        <button type="button" class="btn btn-primary">Update Voicemail</button>
+                    </div>
+                @endif
             </div>      
 		</div>
         <div class="user-info-block">
@@ -279,5 +304,14 @@
 		</div>
 	</div> -->
 </div>
+
+<script>
+    $('select.phones-list').change(function () {
+        let id = $(this).val();
+        var str1 = $('form.phone-update-timeout').attr("action");
+        var str2 = str1.slice(0, -1) + id;
+        $('form.phone-update-timeout').attr("action", str2);
+    });
+</script>
 
 @endsection

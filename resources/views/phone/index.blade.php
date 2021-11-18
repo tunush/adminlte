@@ -8,7 +8,7 @@
 
 @section('content') 
 
-<div class="row">
+<div class="row phones-block">
     <div class="col-md-12">
         <div class="nav-tabs-custom">
 			<ul class="nav nav-tabs">
@@ -115,27 +115,29 @@
                                                             <input type="text" name="forwarding_number" class="form-control" value="{{$phone->forwarding_number}}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="checkbox" name="pass_called_number" value="{{$phone->pass_called_number}}">
-                                                            <label for="nome">Pass called number as caller id</label>
+                                                            <input type="hidden" name="pass_called_number" value="{{$phone->pass_called_number}}">
+                                                            <input type="checkbox" name="pass_">
+                                                            <label for="nome" style="padding-left: 5px;">Pass called number as caller id</label>
                                                             <script>
                                                                 if("{{$phone->pass_called_number}}" == "0") {
-                                                                    $('#modal-edit-{{ $phone->id }} input[name="pass_called_number"]').prop('checked', false);
+                                                                    $('#modal-edit-{{ $phone->id }} input[name="pass_"]').prop('checked', false);
                                                                     $('#modal-edit-{{ $phone->id }} input[name="pass_called_number"]').val('0');
                                                                 } else {
-                                                                    $('#modal-edit-{{ $phone->id }} input[name="pass_called_number"]').prop('checked', true);
+                                                                    $('#modal-edit-{{ $phone->id }} input[name="pass_"]').prop('checked', true);
                                                                     $('#modal-edit-{{ $phone->id }} input[name="pass_called_number"]').val('1');
                                                                 }
                                                             </script>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="checkbox" name="enable_call_connect" value="{{$phone->enable_call_connect}}">
-                                                            <label for="nome">Enable call connect feature</label>
+                                                            <input type="hidden" name="enable_call_connect" value="{{$phone->enable_call_connect}}">
+                                                            <input type="checkbox" name="enable_">
+                                                            <label for="nome" style="padding-left: 5px;">Enable call connect feature</label>
                                                             <script>
                                                                 if("{{$phone->enable_call_connect}}" == "0") {
-                                                                    $('#modal-edit-{{ $phone->id }} input[name="enable_call_connect"]').prop('checked', false);
+                                                                    $('#modal-edit-{{ $phone->id }} input[name="enable_"]').prop('checked', false);
                                                                     $('#modal-edit-{{ $phone->id }} input[name="enable_call_connect"]').val('0');
                                                                 } else {
-                                                                    $('#modal-edit-{{ $phone->id }} input[name="enable_call_connect"]').prop('checked', true);
+                                                                    $('#modal-edit-{{ $phone->id }} input[name="enable_"]').prop('checked', true);
                                                                     $('#modal-edit-{{ $phone->id }} input[name="enable_call_connect"]').val('1');
                                                                 }
                                                             </script>
@@ -216,5 +218,22 @@
 		</div>
     </div>
 </div>
+
+<script>
+    $('input[name="pass_"]').change(function () {
+        if($(this).prop('checked')) {
+            $('input[name="pass_called_number"]').val('1');
+        } else {
+            $('input[name="pass_called_number"]').val('0');
+        }
+    });
+    $('input[name="enable_"]').change(function () {
+        if($(this).prop('checked')) {
+            $('input[name="enable_call_connect"]').val('1');
+        } else {
+            $('input[name="enable_call_connect"]').val('0');
+        }
+    });
+</script>
 
 @endsection

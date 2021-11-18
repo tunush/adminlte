@@ -17,15 +17,16 @@
     </head>
     <body class="hold-transition login-page">
         <div id="box-login-personalize">
-            <div class="login-logo">
+            @if($config !== null)
+                <div class="login-logo">
+                    @if(\App\Models\Config::find($company_id)->img_login == 'T')
+                        <img src="{{ asset(\App\Models\Config::find($company_id)->caminho_img_login) }}" width="{{ \App\Models\Config::find($company_id)->tamanho_img_login }}%"/>
+                        <br/>
+                    @endif
                 
-                @if(\App\Models\Config::find(1)->img_login == 'T')
-                    <img src="{{ asset(\App\Models\Config::find(1)->caminho_img_login) }}" width="{{ \App\Models\Config::find(1)->tamanho_img_login }}%"/>
-                    <br/>
-                @endif
-               
-                {!! \App\Models\Config::find(1)->titulo_login !!}             
-            </div>
+                    <strong>{!! \App\Models\Config::find($company_id)->app_name !!}</strong>
+                </div>
+            @endif
             <div class="login-box-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form  method="POST" action="{{ route('login') }}">
@@ -37,18 +38,17 @@
                     <div class="form-group has-feedback">
                         <input id="password" type="password" class="form-control" placeholder="Password" name="password" required="" AUTOCOMPLETE='off'>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        @if ($errors->has('email'))
-                            <br/>
-                            <span class="help-block">
-                                <strong><p class="text-red">{{ $errors->first('email') }}</p></strong>
-                            </span>
-                        @endif
-                        @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
                     </div>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong><p class="text-red">{{ $errors->first('email') }}</p></strong>
+                        </span>
+                    @endif
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong><p class="text-red">{{ $errors->first('password') }}<p></strong>
+                        </span>
+                    @endif
                     <div class="row">  
                         <!--<div class="col-xs-8">
                           <div class="checkbox icheck">

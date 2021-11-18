@@ -61,16 +61,19 @@ class UserController extends Controller
         $headers = "From: " . $from;
 
         $this->authorize('create-user', User::class);
+        
+        $message = '<div>URL the login area: <a href="http://localhost:8000/login">http://localhost:8000/login</a></div>
+                    <div>Login: '.$request->input('email').'</div>
+                    <div>Password: '.$request->get('password').'</div>
+                    <div>Personalized message: '.$request->input('message').'</div>';
 
         $request->merge(['password' => bcrypt($request->get('password'))]);
-
         $user = User::create($request->all());
 
         $roles = $request->input('roles') ? $request->input('roles') : [];
 
         $user->roles()->sync($roles);
 
-        $message = '<h3>Personalized message</h3><div>'.$request->input('message').'</div>';
         mail($to, $subject, $message, $headers);
 
         $this->flashMessage('check', 'User successfully added!', 'success');

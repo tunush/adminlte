@@ -52,11 +52,15 @@ class PhoneController extends Controller
     public function update(StoreRoleRequest $request, $id)
     {
         $phone = TwilloNumbers::find($id);
+        
         $phone->update($request->all());
 
-        $this->flashMessage('check', 'Phone number updated successfully!', 'success');
-
-        return redirect()->route('phone');
+        if(!$request->has('name')) {
+            return redirect()->route('profile');
+        } else {
+            $this->flashMessage('check', 'Phone number updated successfully!', 'success');
+            return redirect()->route('phone');
+        }
     }
 
     public function destroy($id)

@@ -22,25 +22,33 @@
                                 <input type="text" name="value" class="form-control" value="{{ $field->value }}">
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @if(Auth::user()->id == 1)
+                                    <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @endif
                             @endif
                             @if($field->type == 'Date Textbox')
                                 <input type="date" name="value" class="form-control" value="{{ $field->value }}">
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @if(Auth::user()->id == 1)
+                                    <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @endif
                             @endif
                             @if($field->type == 'Large Textbox')
                                 <textarea name="value" class="form-control" rows="6">{{ $field->value }}</textarea>
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @if(Auth::user()->id == 1)
+                                    <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @endif
                             @endif
                             @if($field->type == 'Currency Textbox')
                                 <input type="text" name="value" class="form-control currency_input" value="{{ $field->value }}">
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @if(Auth::user()->id == 1)
+                                    <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @endif
                             @endif
                             @if($field->type == 'Yes/No Dropdown')
                                 <select name="value" class="form-control">
@@ -49,7 +57,9 @@
                                 </select>
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @if(Auth::user()->id == 1)
+                                    <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @endif
 
                                 <script>
                                     $('#{{ $field->id }} select[name="value"]').val('{{ $field->value }}');
@@ -70,7 +80,9 @@
                                 </div>
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @if(Auth::user()->id == 1)
+                                    <a href="{{ route('seller_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                @endif
 
                                 <script>
                                     $('#{{ $field->id }} select[name="value"]').val('{{ $field->value }}');

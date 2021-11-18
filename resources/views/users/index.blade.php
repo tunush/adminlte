@@ -148,7 +148,7 @@
 																		@endif
 																	</div>
 																</div>
-																<!-- <div class="col-lg-6">
+																<div class="col-lg-12">
 																	<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
 																		<label for="nome">Password</label>
 																		<input type="password" name="password" class="form-control" placeholder="Password" minlength="6" required="">
@@ -157,9 +157,15 @@
 																				<strong>{{ $errors->first('password') }}</strong>
 																			</span>
 																		@endif
+																		<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" minlength="6" required="">
+																		@if($errors->has('password-confirm'))
+																			<span class="help-block">
+																				<strong>{{ $errors->first('password-confirm') }}</strong>
+																			</span>
+																		@endif
 																	</div>
 																</div>
-																<div class="col-lg-6">
+																<!-- <div class="col-lg-6">
 																	<div class="form-group {{ $errors->has('password-confirm') ? 'has-error' : '' }}">
 																		<label for="nome">Confirm Password</label>
 																		<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" minlength="6" required="">

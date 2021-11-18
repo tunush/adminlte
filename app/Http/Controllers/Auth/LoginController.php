@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Config;
 
 class LoginController extends Controller
 {
@@ -59,5 +60,19 @@ class LoginController extends Controller
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors($errors);
+    }
+
+    public function showLoginForm($id = 0)
+    {
+        if($id == 0 || empty($id)) {
+            $config = null;
+            $company_id = null;
+            setcookie("company_id", $id, 0, "/");
+        } else {
+            $config = Config::find($id);
+            $company_id = $id;
+            setcookie("company_id", $company_id, 0, "/");
+        }
+        return view('auth.login', compact('config', 'company_id'));
     }
 }

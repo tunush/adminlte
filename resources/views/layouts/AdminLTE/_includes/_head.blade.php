@@ -108,7 +108,8 @@
                 margin: 10px;
         }
         .users-block .table>thead:first-child>tr:first-child>th, 
-        .roles-block .table>thead:first-child>tr:first-child>th {
+        .roles-block .table>thead:first-child>tr:first-child>th,
+        .phones-block .table>thead:first-child>tr:first-child>th {
                 border-bottom: 1px solid #3c8dbc;
         }
         .users-block .table-bordered>thead>tr>th, .users-block .table-bordered>tbody>tr>th, 
@@ -118,11 +119,16 @@
         .roles-block .table-bordered>thead>tr>th, .roles-block .table-bordered>tbody>tr>th, 
         .roles-block .table-bordered>tfoot>tr>th, .roles-block .table-bordered>thead>tr>td, 
         .roles-block .table-bordered>tbody>tr>td, .roles-block .table-bordered>tfoot>tr>td,
-        .roles-block .table-bordered {
+        .roles-block .table-bordered,
+        .phones-block .table-bordered>thead>tr>th, .phones-block .table-bordered>tbody>tr>th, 
+        .phones-block .table-bordered>tfoot>tr>th, .phones-block .table-bordered>thead>tr>td, 
+        .phones-block .table-bordered>tbody>tr>td, .phones-block .table-bordered>tfoot>tr>td,
+        .phones-block .table-bordered {
                 border: none;
         }
         .users-block .table-bordered>tbody>tr:first-child>td, 
-        .roles-block .table-bordered>tbody>tr:first-child>td {
+        .roles-block .table-bordered>tbody>tr:first-child>td,
+        .phones-block .table-bordered>tbody>tr:first-child>td {
                 padding-top: 10px;
         }
         .custom-fields-block, .default-fields-block {
