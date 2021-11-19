@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Config;
+use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class PlaceHolderController extends Controller
 {
@@ -25,7 +27,20 @@ class PlaceHolderController extends Controller
      */
     public function index()
     {  
-        $config = Config::find(1);
-        return view('place_holder', compact('config'));       
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            if(Auth::user()->company_id != 0 && Auth::user()->company_id != $_COOKIE["company_id"]) {
+                return redirect()->route('logout');
+            } else {
+                Auth::user()->last_login = new DateTime();
+                Auth::user()->save();
+                return view('place_holder');
+            }
+        } else {
+            if(Auth::user()->company_id != 0) {
+                return redirect()->route('logout');
+            }
+        }
+
+        return view('place_holder');
     }
 }

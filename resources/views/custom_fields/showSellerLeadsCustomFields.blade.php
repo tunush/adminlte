@@ -13,7 +13,7 @@
         display: flex;
         align-items: center;
         position: relative;
-        width: 92%;
+        width: 90%;
         justify-content: center;
         padding: 20px 15px 30px 15px;
     }
@@ -31,12 +31,12 @@
 
     .actions {
         position: absolute;
-        right: -8%;
+        right: -10%;
         background: #fff;
         padding: 10px;
         border: 1px solid #ddd;
         top: 0;
-        width: 8%;
+        width: 10%;
     }
 </style>
 
@@ -265,6 +265,7 @@
                                                     <div class="modal-body">
                                                         <form action="{{ route('seller_leads_custom_fields.update', $field->id) }}" method="post">
                                                             {{ csrf_field() }}
+                                                            <input type="hidden" name="field_condition">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-12 {{ $errors->has('label') ? 'has-error' : '' }}">
@@ -295,6 +296,45 @@
                                                                         $('#modal-edit-{{ $field->id }} select[name="type"]').val('{{ $field->type }}');
                                                                     </script>
                                                                 </div>
+                                                                @if($field->field_condition !== null)
+                                                                    @php 
+                                                                        $fieldCondidtion = json_decode($field->field_condition, true);
+                                                                    @endphp
+                                                                @endif
+                                                                <div class="col-lg-12 field-condition-block" style="display: none;">
+                                                                    <div class="col-lg-12">
+                                                                        <p>Only show this field when: </p>
+                                                                        <div class="form-group">
+                                                                            <select class="form-control field-select-custom-field">
+                                                                                @foreach($fields as $c_field)
+                                                                                    @if($c_field->id !== $field->id)
+                                                                                        @if($c_field->default_field_id !== null)
+                                                                                            @php
+                                                                                                $def_field3 = App\Models\SellerLeadsDefaultFields::where('id', $c_field->default_field_id)->get()[0];
+                                                                                            @endphp
+                                                                                            <option value="{{$c_field->id}}">{{$def_field3->label}}</option>
+                                                                                        @else
+                                                                                            <option value="{{$c_field->id}}">{{$c_field->label}}</option>
+                                                                                        @endif
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </select>
+                                                                            <select class="form-control field-condition-field">
+                                                                                <option value="=">=</option>
+                                                                                <option value="!=">!=</option>
+                                                                                <option value=">=">>=</option>
+                                                                                <option value="<="><=</option>
+                                                                            </select>
+                                                                            <input type="text" class="form-control field-value-field" placeholder="Value">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12" style="margin-top: 15px;">
+                                                                    <div class="col-lg-12 text-center">
+                                                                        <button type="button" class="btn btn-default field-add-condition" style="width: 100%;">Add condition</button>
+                                                                        <button type="button" class="btn btn-default field-remove-condition" style="display: none; width: 100%;">Remove condition</button>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-lg-12" style="margin-top: 15px;">
                                                                     <div class="col-lg-6">
                                                                         <button type="button" class="btn btn-success pull-left" data-dismiss="modal">Close</button>
@@ -303,6 +343,16 @@
                                                                         <button type="submit" class="btn btn-primary pull-right">Save Changes</button>
                                                                     </div>
                                                                 </div>
+                                                                @if($field->field_condition !== null)
+                                                                    <script>
+                                                                        $('#modal-edit-{{ $field->id }} .field-condition-block').css('display', 'block');
+                                                                        $('#modal-edit-{{ $field->id }} .field-add-condition').css('display', 'none');
+                                                                        $('#modal-edit-{{ $field->id }} .field-remove-condition').css('display', 'block');
+                                                                        $('#modal-edit-{{ $field->id }} .field-select-custom-field').val('{{ $fieldCondidtion[0] }}');
+                                                                        $('#modal-edit-{{ $field->id }} .field-condition-field').val('{{ $fieldCondidtion[1] }}');
+                                                                        $('#modal-edit-{{ $field->id }} .field-value-field').val('{{ $fieldCondidtion[2] }}');
+                                                                    </script>
+                                                                @endif
                                                             </div>
                                                         </form>
                                                     </div>
@@ -386,6 +436,7 @@
                                         <div class="modal-body">
                                             <form action="{{ route('seller_leads_custom_section.update', $row->id) }}" method="post">
                                                 {{ csrf_field() }}
+                                                <input type="hidden" name="section_condition">
                                                 <div class="row">
                                                     <div class="col-lg-12">
                                                         <div class="col-lg-12">
@@ -402,11 +453,58 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @if($row->section_condition !== null)
+                                                        @php 
+                                                            $sectionCondidtion = json_decode($row->section_condition, true);
+                                                        @endphp
+                                                    @endif
+                                                    <div class="col-lg-12 condition-block" style="display: none;">
+                                                        <div class="col-lg-12">
+                                                            <p>Only show this section when: </p>
+                                                            <div class="form-group">  
+                                                                <select class="form-control select-custom-field">
+                                                                    @foreach($fields as $field)
+                                                                        @if($field->default_field_id !== null)
+                                                                            @php
+                                                                                $def_field2 = App\Models\SellerLeadsDefaultFields::where('id', $field->default_field_id)->get()[0];
+                                                                            @endphp
+                                                                            <option value="{{$field->id}}">{{$def_field2->label}}</option>
+                                                                        @else
+                                                                            <option value="{{$field->id}}">{{$field->label}}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                                <select class="form-control condition-field">
+                                                                    <option value="=">=</option>
+                                                                    <option value="!=">!=</option>
+                                                                    <option value=">=">>=</option>
+                                                                    <option value="<="><=</option>
+                                                                </select>
+                                                                <input type="text" class="form-control value-field" placeholder="Value">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12" style="margin-top: 15px;">
+                                                        <div class="col-lg-12 text-center">
+                                                            <button type="button" class="btn btn-default add-condition" style="width: 100%;">Add condition</button>
+                                                            <button type="button" class="btn btn-default remove-condition" style="display: none; width: 100%;">Remove condition</button>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-lg-12" style="margin-top: 15px;">
                                                         <div class="col-lg-12 text-center">
                                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                                         </div>
                                                     </div>
+                                                    @if($row->section_condition !== null)
+                                                        <script>
+                                                            $('#modal-section-edit-{{ $row->id }} .condition-block').css('display', 'block');
+                                                            $('#modal-section-edit-{{ $row->id }} .add-condition').css('display', 'none');
+                                                            $('#modal-section-edit-{{ $row->id }} .remove-condition').css('display', 'block');
+                                                            $('#modal-section-edit-{{ $row->id }} .select-custom-field').val('{{ $sectionCondidtion[0] }}');
+                                                            $('#modal-section-edit-{{ $row->id }} .condition-field').val('{{ $sectionCondidtion[1] }}');
+                                                            $('#modal-section-edit-{{ $row->id }} .value-field').val('{{ $sectionCondidtion[2] }}');
+                                                        </script>
+                                                    @endif
                                                 </div>
                                             </form>
                                             <script>
@@ -657,6 +755,68 @@
                     $(this).parent().parent().parent().parent().find('input[name="custom_options"]').val("{"+res+"}");
                 }, false);
             }
+
+            $('input.value-field').change(function() {
+                let res = [$(this).parent().find('.select-custom-field').val(), $(this).parent().find('.condition-field').val(), $(this).val()];
+                $(this).parent().parent().parent().parent().parent().find('input[name="section_condition"]').val(JSON.stringify(res));
+            });
+
+            $('.select-custom-field').change(function() {
+                let res = [$(this).val(), $(this).parent().find('.condition-field').val(), $(this).parent().find('input.value-field').val()];
+                $(this).parent().parent().parent().parent().parent().find('input[name="section_condition"]').val(JSON.stringify(res));
+            });
+
+            $('.condition-field').change(function() {
+                let res = [$(this).parent().find('.select-custom-field').val(), $(this).val(), $(this).parent().find('input.value-field').val()];
+                $(this).parent().parent().parent().parent().parent().find('input[name="section_condition"]').val(JSON.stringify(res));
+            });
+
+            $('.add-condition').click(function() {
+                $(this).css('display', 'none');
+                $(this).parent().find('.remove-condition').css('display', 'block');
+                $(this).parent().parent().parent().find('.condition-block').css('display', 'block');
+            });
+
+            $('.remove-condition').click(function() {
+                $(this).css('display', 'none');
+                $(this).parent().find('.add-condition').css('display', 'block');
+                $(this).parent().parent().parent().find('.condition-block').css('display', 'none');
+                $(this).parent().parent().parent().parent().find('input[name="section_condition"]').val("");
+                $(this).parent().parent().parent().find('.select-custom-field').val('');
+                $(this).parent().parent().parent().find('.condition-field').val('=');
+                $(this).parent().parent().parent().find('input.value-field').val('');
+            });
+
+            $('input.field-value-field').change(function() {
+                let res = [$(this).parent().find('.field-select-custom-field').val(), $(this).parent().find('.field-condition-field').val(), $(this).val()];
+                $(this).parent().parent().parent().parent().parent().find('input[name="field_condition"]').val(JSON.stringify(res));
+            });
+
+            $('.field-select-custom-field').change(function() {
+                let res = [$(this).val(), $(this).parent().find('.field-condition-field').val(), $(this).parent().find('input.field-value-field').val()];
+                $(this).parent().parent().parent().parent().parent().find('input[name="field_condition"]').val(JSON.stringify(res));
+            });
+
+            $('.field-condition-field').change(function() {
+                let res = [$(this).parent().find('.field-select-custom-field').val(), $(this).val(), $(this).parent().find('input.field-value-field').val()];
+                $(this).parent().parent().parent().parent().parent().find('input[name="field_condition"]').val(JSON.stringify(res));
+            });
+
+            $('.field-add-condition').click(function() {
+                $(this).css('display', 'none');
+                $(this).parent().find('.field-remove-condition').css('display', 'block');
+                $(this).parent().parent().parent().find('.field-condition-block').css('display', 'block');
+            });
+
+            $('.field-remove-condition').click(function() {
+                $(this).css('display', 'none');
+                $(this).parent().find('.field-add-condition').css('display', 'block');
+                $(this).parent().parent().parent().find('.field-condition-block').css('display', 'none');
+                $(this).parent().parent().parent().parent().find('input[name="field_condition"]').val("");
+                $(this).parent().parent().parent().find('.field-select-custom-field').val('');
+                $(this).parent().parent().parent().find('.field-condition-field').val('=');
+                $(this).parent().parent().parent().find('input.field-value-field').val('');
+            });
         });
     </script>
 @endsection

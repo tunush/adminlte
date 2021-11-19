@@ -20,25 +20,28 @@ class SellerLeadsDefaultFieldsController extends Controller
 
 	public function index() 
 	{ 
-		$config = Config::find(1);
-
-		return view('default_fields.index',compact('config'));
+		return view('default_fields.index');
 	}
 
     public function show() {
-        $config = Config::find(1);
-        $fields = SellerLeadsDefaultFields::all();
-        return view('default_fields.showSellerLeadsDefaultFields', compact('fields', 'config'));
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $fields = SellerLeadsDefaultFields::where('company_id', $_COOKIE["company_id"])->get();
+            return view('default_fields.showSellerLeadsDefaultFields', compact('fields'));
+        } else {
+            return view('default_fields.index');
+        }
     }
 
 	public function store(StoreRoleRequest $request) {
-        $config = Config::find(1);
         $request->validate([
             'label' => 'required|unique:seller_leads_default_fields',
         ]);
-        $field = SellerLeadsDefaultFields::create($request->all());
 
-        $this->flashMessage('check', 'Default field successfully added!', 'success');
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $result = array_merge($request->all(), ['company_id' => $_COOKIE["company_id"]]);
+            $field = SellerLeadsDefaultFields::create($result);
+            $this->flashMessage('check', 'Default field successfully added!', 'success');
+        }
 
         return redirect()->route('seller_leads_default_fields');
     }

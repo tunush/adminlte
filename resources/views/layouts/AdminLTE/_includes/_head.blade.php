@@ -1,9 +1,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>
-        {!! \App\Models\Config::find(1)->app_name_abv !!} | @yield('title')
+        @if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0)
+                {{ \App\Models\Config::find($_COOKIE["company_id"])->app_name }} | @yield('title')
+        @else
+                @yield('title')
+        @endif
 </title>
-<link rel="shortcut icon" href="{{ asset(\App\Models\Config::find(1)->favicon) }}" type="image/x-icon"/>
+@if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0)
+        <link rel="shortcut icon" href="{{ asset(\App\Models\Config::find($_COOKIE['company_id'])->favicon) }}" type="image/x-icon"/>
+@endif
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.7 -->

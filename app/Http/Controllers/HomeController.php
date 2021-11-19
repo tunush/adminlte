@@ -25,7 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {  
-        $config = Config::find(1);
-        return view('home', compact('config'));       
+        return view('home');
     }
 }

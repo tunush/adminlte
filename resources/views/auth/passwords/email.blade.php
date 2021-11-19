@@ -15,7 +15,7 @@
     </head>
     <body class="hold-transition login-page">
     <div id="box-login-personalize">
-            @if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] !== 0)
+            @if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0)
                 <div class="login-logo">
                     @if(\App\Models\Config::find($_COOKIE["company_id"])->img_login == 'T')
                         <img src="{{ asset(\App\Models\Config::find($_COOKIE['company_id'])->caminho_img_login) }}" width="{{ \App\Models\Config::find($_COOKIE['company_id'])->tamanho_img_login }}%"/>

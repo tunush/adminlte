@@ -89,8 +89,12 @@
 												 <!-- <a class="btn btn-warning  btn-xs" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->name }}"><i class="fa fa-pencil"></i></a> 
 												 <a class="btn btn-danger  btn-xs" href="#" title="Delete {{ $user->name}}" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}"><i class="fa fa-trash"></i></a>  -->
 
-												 <a class="btn btn-success  btn-xs" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->name }}">Edit</a> 
-												 <a class="btn btn-danger  btn-xs" href="#" title="Delete {{ $user->name}}" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}">Delete</a> 
+												@if(strrpos($user->last_login, '0000-00-00') === false)
+												 	<a class="btn btn-success  btn-xs" href="{{ route('user.edit', $user->id) }}" title="Edit {{ $user->name }}" style="width: 70px;">Edit</a>
+												@else
+												 	<a class="btn btn-default  btn-xs" href="{{ route('user.sendInvintation', $user->id) }}" title="Pending {{ $user->name }}" style="width: 70px;">Pending</a>
+												@endif
+												<a class="btn btn-danger  btn-xs" href="#" title="Delete {{ $user->name}}" data-toggle="modal" data-target="#modal-delete-{{ $user->id }}" style="width: 70px;">Delete</a> 
 											</td>
 										</tr>
 										<div class="modal fade" id="modal-delete-{{ $user->id }}">
@@ -148,16 +152,16 @@
 																		@endif
 																	</div>
 																</div>
-																<div class="col-lg-12">
+																<div class="col-lg-12" style="display: none;">
 																	<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
 																		<label for="nome">Password</label>
-																		<input type="password" name="password" class="form-control" placeholder="Password" minlength="6" required="">
+																		<input type="password" name="password" class="form-control" placeholder="Password" minlength="6" value="1234567">
 																		@if($errors->has('password'))
 																			<span class="help-block">
 																				<strong>{{ $errors->first('password') }}</strong>
 																			</span>
 																		@endif
-																		<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" minlength="6" required="">
+																		<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" minlength="6" value="1234567">
 																		@if($errors->has('password-confirm'))
 																			<span class="help-block">
 																				<strong>{{ $errors->first('password-confirm') }}</strong>
@@ -165,17 +169,6 @@
 																		@endif
 																	</div>
 																</div>
-																<!-- <div class="col-lg-6">
-																	<div class="form-group {{ $errors->has('password-confirm') ? 'has-error' : '' }}">
-																		<label for="nome">Confirm Password</label>
-																		<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" minlength="6" required="">
-																		@if($errors->has('password-confirm'))
-																			<span class="help-block">
-																				<strong>{{ $errors->first('password-confirm') }}</strong>
-																			</span>
-																		@endif
-																	</div>
-																</div> -->
 																<div class="col-lg-12">
 																	<div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
 																		<label for="nome">Role</label>

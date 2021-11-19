@@ -22,19 +22,20 @@ class BuyerLeadsCustomFieldsController extends Controller
 
 	public function index() 
 	{
-		$config = Config::find(1);
-
-		return view('custom_fields.index',compact('config'));
+		return view('custom_fields.index');
 	}
 
 	public function show() 
 	{
-		$config = Config::find(1);
-		$data = BuyerLeadsCustomSections::orderBy('sort_id','asc')->get();
-		$max_sort_id = BuyerLeadsCustomSections::max('sort_id');
-		$fields = BuyerLeadsCustomFields::all();
-        $default_fields = BuyerLeadsDefaultFields::all();
-		return view('custom_fields.showBuyerLeadsCustomFields', compact('data', 'max_sort_id', 'fields', 'default_fields', 'config'));
+		if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $data = BuyerLeadsCustomSections::where('company_id', $_COOKIE["company_id"])->orderBy('sort_id','asc')->get();
+            $max_sort_id = BuyerLeadsCustomSections::where('company_id', $_COOKIE["company_id"])->max('sort_id');
+            $fields = BuyerLeadsCustomFields::where('company_id', $_COOKIE["company_id"])->get();
+            $default_fields = BuyerLeadsDefaultFields::where('company_id', $_COOKIE["company_id"])->get();
+            return view('custom_fields.showBuyerLeadsCustomFields', compact('data', 'max_sort_id', 'fields', 'default_fields'));
+        } else {
+            return view('custom_fields.index');
+        }
 	}
 
 	public function updateOrder(Request $request){
@@ -69,11 +70,12 @@ class BuyerLeadsCustomFieldsController extends Controller
         if(!$request->has('full')) {
             $result = array_merge($request->all(), ['full' => '0']);
         } else $result = $request->all();
-        
-        $config = Config::find(1);
-        $section = BuyerLeadsCustomSections::create($result);
 
-        $this->flashMessage('check', 'Section successfully added!', 'success');
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $result = array_merge($result, ['company_id' => $_COOKIE["company_id"]]);
+            $section = BuyerLeadsCustomSections::create($result);
+            $this->flashMessage('check', 'Section successfully added!', 'success');
+        }
 
         return redirect()->route('buyer_leads_custom_fields');
     }
@@ -90,15 +92,16 @@ class BuyerLeadsCustomFieldsController extends Controller
     }
 
 	public function store(StoreRoleRequest $request, $id) {
-        $config = Config::find(1);
         if(isset($request->all()["label"]) && !isset($request->all()["default_field_id"])) {
             $request->validate([
                 'label' => 'required|unique:buyer_leads_custom_fields',
             ]);
         }
-        $field = BuyerLeadsCustomFields::create($request->all());
-
-        $this->flashMessage('check', 'Custom field successfully added!', 'success');
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $result = array_merge($request->all(), ['company_id' => $_COOKIE["company_id"]]);
+            $field = BuyerLeadsCustomFields::create($result);
+            $this->flashMessage('check', 'Custom field successfully added!', 'success');
+        }
 
         return redirect()->route('buyer_leads_custom_fields');
     }

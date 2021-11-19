@@ -17,7 +17,7 @@
 			</ul>
 			<div class="tab-content">
 				<div class="active tab-pane" id="settings">
-                    <form action="{{ route('phone.update.settings', 1) }}" method="post" style="margin-top: 20px;">
+                    <form action="{{ route('phone.update.settings', $settings->id) }}" method="post" style="margin-top: 20px;">
                         {{ csrf_field() }}
                         <div class="form-group" style="display: block;">
                             <label for="nome">Twilio Account SID</label>
@@ -153,7 +153,7 @@
                                                         <div class="form-group" style="display: block;">
                                                             <label for="nome">Assign User</label>
                                                             @php
-                                                                $users = App\Models\User::all();
+                                                                $users = App\Models\User::where('company_id', $_COOKIE["company_id"])->get();
                                                             @endphp
                                                             <select name="assigned_user" class="form-control">
                                                                 @foreach($users as $user)

@@ -8,8 +8,8 @@ use App\Models\User;
 
 class Role extends Model
 {
-	protected $fillable = [
-        'name', 'label', 'duties'
+	  protected $fillable = [
+      'company_id', 'name', 'label', 'duties'
     ];
 
     public function permissions()
@@ -19,7 +19,7 @@ class Role extends Model
 
     static function rolesUser($user)
     {
-		$roles_ids = [];
+		  $roles_ids = [];
 
      	foreach ($user->roles as $role) {
      		$roles_ids[] = $role->id;

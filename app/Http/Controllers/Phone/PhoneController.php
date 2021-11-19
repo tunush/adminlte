@@ -32,10 +32,13 @@ class PhoneController extends Controller
      */
     public function index()
     {  
-        $config = Config::find(1);
-        $settings = TwilloSettings::find(1);
-        $phones = TwilloNumbers::all();
-        return view('phone.index', compact('config', 'settings', 'phones'));
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $settings = TwilloSettings::where('company_id', $_COOKIE["company_id"])->get()[0];
+            $phones = TwilloNumbers::where('company_id', $_COOKIE["company_id"])->get();
+            return view('phone.index', compact('settings', 'phones'));
+        } else {
+            return view('place_holder');
+        }
     }
 
     public function updateSettings(StoreRoleRequest $request, $id)

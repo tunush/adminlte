@@ -1,11 +1,9 @@
-@php session_start(); @endphp
-
 <header class="main-header">
   <a href="{{ route('home') }}" class="logo">
     <!-- <span class="logo-mini">{!! \App\Models\Config::find(1)->app_name_abv !!}</span>
     <span class="logo-lg">{!! \App\Models\Config::find(1)->app_name !!}</span> -->
     
-    @if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] !== 0)
+    @if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0)
       <img src="{{ asset(\App\Models\Config::find($_COOKIE['company_id'])->caminho_img_login) }}" width="50px" class="img-thumbnail">
     @endif
   </a>

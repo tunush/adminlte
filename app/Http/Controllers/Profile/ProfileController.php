@@ -21,15 +21,13 @@ class ProfileController extends Controller
 
 	public function index() 
 	{ 
-		$config = Config::find(1);
-
         $user = Auth::user();
 
 		$roles = Role::all();
 
 		$roles_ids = Role::rolesUser($user);
 
-		return view('profile.index',compact('user', 'roles', 'roles_ids', 'config'));
+		return view('profile.index',compact('user', 'roles', 'roles_ids'));
 	}
 
 	public function updateProfile(UpdateProfileRequest $request,$id)

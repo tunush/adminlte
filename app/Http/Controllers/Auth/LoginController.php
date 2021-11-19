@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Config;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -74,5 +75,11 @@ class LoginController extends Controller
             setcookie("company_id", $company_id, 0, "/");
         }
         return view('auth.login', compact('config', 'company_id'));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

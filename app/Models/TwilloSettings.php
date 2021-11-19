@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TwilloSettings extends Model
 {
     protected $fillable = [
-        'account_sid', 'auth_token', 'application_sid'
+        'company_id', 'account_sid', 'auth_token', 'application_sid'
     ];
 
     protected $table = 'twillo_settings';

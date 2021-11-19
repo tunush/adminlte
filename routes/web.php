@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('login/{id?}', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+Route::get('logout','App\Http\Controllers\Auth\LoginController@logout');
 
 // Route::get('/', 'App\Http\Controllers\HomeController@index');
 // Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
@@ -58,6 +59,7 @@ Route::group(['namespace' => 'App\Http\Controllers\User'], function (){
 	Route::get('/user/create', 'UserController@create')->name('user.create');
 	Route::post('/user/store', 'UserController@store')->name('user.store');
 	Route::get('/user/edit/{id}', 'UserController@edit')->name('user.edit');
+	Route::get('/user/sendInvintation/{id}', 'UserController@sendInvintation')->name('user.sendInvintation');
 	Route::put('/user/update/{id}', 'UserController@update')->name('user.update');
 	Route::get('/user/edit/password/{id}', 'UserController@editPassword')->name('user.edit.password');
 	Route::put('/user/update/password/{id}', 'UserController@updatePassword')->name('user.update.password');

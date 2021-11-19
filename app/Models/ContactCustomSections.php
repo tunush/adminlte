@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContactCustomSections extends Model
 {
     protected $fillable = [
-        'title', 'full', 'section_condition', 'sort_id'
+        'company_id', 'title', 'full', 'section_condition', 'sort_id'
     ];
 
     protected $table = 'contact_custom_sections';

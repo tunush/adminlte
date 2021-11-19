@@ -15,19 +15,20 @@ class RoleController extends Controller
 { 
     public function index()
     { 
-        $config = Config::find(1);
         $this->authorize('show-role', Role::class);
 
-        $roles = Role::paginate(15);
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $roles = Role::where('company_id', $_COOKIE["company_id"])->paginate(15);
+            $permission_groups = PermissionGroup::all();
 
-        $permission_groups = PermissionGroup::all();
-
-        return view('users.roles.index', compact('roles', 'permission_groups', 'config'));
+            return view('users.roles.index', compact('roles', 'permission_groups'));
+        } else {
+            return view('place_holder');
+        }
     }
 
     public function show($id)
     { 
-        $config = Config::find(1);
         $this->authorize('show-role', User::class);
 
         $role = Role::find($id);
@@ -41,43 +42,43 @@ class RoleController extends Controller
 
         $permission_groups = PermissionGroup::all();                       
 
-        return view('users.roles.show',compact('role', 'permissions_ids', 'permission_groups', 'config'));
+        return view('users.roles.show',compact('role', 'permissions_ids', 'permission_groups'));
     }
 
     public function create()
     {
-        $config = Config::find(1);
         $this->authorize('create-role', Role::class);
 
         $permission_groups = PermissionGroup::all();
 
-        return view('users.roles.create', compact('permission_groups', 'config'));
+        return view('users.roles.create', compact('permission_groups'));
     }
 
     public function store(StoreRoleRequest $request)
     {
         $this->authorize('create-role', Role::class);
 
-        // die(var_dump($request->all()));
-
         $request->validate([
             'name' => 'required|unique:roles',
         ]);
 
-        $role = Role::create($request->all());
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $result = array_merge($request->all(), ['company_id' => $_COOKIE["company_id"]]);
 
-        $permissions = $request->input('permissions') ? $request->input('permissions') : [];
+            $role = Role::create($result);
 
-        $role->permissions()->sync($permissions);
+            $permissions = $request->input('permissions') ? $request->input('permissions') : [];
 
-        $this->flashMessage('check', 'Permission successfully added!', 'success');
+            $role->permissions()->sync($permissions);
+
+            $this->flashMessage('check', 'Permission successfully added!', 'success');
+        }
 
         return redirect()->route('role');
     }
 
     public function edit($id)
     { 
-        $config = Config::find(1);
         $this->authorize('edit-role', Role::class);
 
         $role = Role::find($id);
@@ -91,7 +92,7 @@ class RoleController extends Controller
 
         $permission_groups = PermissionGroup::all();
 
-        return view('users.roles.edit',compact('role', 'permission_groups', 'permissions_ids', 'config'));
+        return view('users.roles.edit',compact('role', 'permission_groups', 'permissions_ids'));
     }
 
     public function update(UpdateRoleRequest $request,$id)
