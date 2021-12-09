@@ -12,9 +12,13 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\TwilloSettings;
 use App\Models\TwilloNumbers;
+//use Services_Twilio;
 
 class PhoneController extends Controller
 {
+    //use InteractsWithQueue;
+    //private $twilioClient;
+
     /**
      * Create a new controller instance.
      *
@@ -23,6 +27,13 @@ class PhoneController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
+            $settings = TwilloSettings::where('company_id', $_COOKIE["company_id"])->get()[0];
+            // $account_sid = $settings->account_sid;
+            // $auth_token = $settings->auth_token;
+            //$this->twilioClient = new Services_Twilio($account_sid, $auth_token);
+        }
     }
 
     /**

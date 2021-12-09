@@ -11,15 +11,11 @@
     <div class="col-lg-12 default-fields-block">
       <div class="main-content">
         <p>To get started, select which details page you like to customize</p>
-        <a href="{{ route('seller_leads_default_fields') }}" class="default-block">
-            <span>Seller Leads / Properties</span>
-        </a>
-        <a href="{{ route('buyer_leads_default_fields') }}" class="default-block">
-          <span>Buyer Leads / Buyer Details</span>
-        </a>
-        <a href="{{ route('contact_default_fields') }}" class="default-block">
-          <span>Contact Details</span>
-        </a>
+        @foreach($data as $d)
+          <a href="{{ route('template_default_fields', $d->id) }}" class="default-block">
+            <span>{{$d->menu_name}}</span>
+          </a>
+        @endforeach
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 
 @section('icon_page', '')
 
-@section('title', 'Customizing Custom Fields > Buyer Leads/Buyer Details')
+@section('title', '')
 
 @section('menu_pagina')	
 @endsection
@@ -39,7 +39,6 @@
         width: 10%;
     }
 </style>
-
     <div class="">
         <div class="row">
             <div class="col-md-12">	
@@ -51,37 +50,37 @@
                                 <div style="{{ $row->full ? '' : 'display: flex; justify-content: space-between; flex-wrap: wrap;' }}">
                                 @foreach($fields as $field)
                                 @if($field->section_id == $row->id)
-                                    <form action="{{ route('buyer_leads_custom_fields.updateValue', $field->id) }}" method="post" style="{{ $row->full ? 'width: 100%;' : 'width: 45%;'}}">
+                                    <form action="{{ route('template_custom_fields.updateValue', [$field->id, $id]) }}" method="post" style="{{ $row->full ? 'width: 100%;' : 'width: 45%;'}}">
                                         {{ csrf_field() }}
                                         <div id="{{$field->id}}" class="form-group">
                                         @if($field->default_field_id !== null)
                                             @php
-                                                $def_field = App\Models\BuyerLeadsDefaultFields::where('id', $field->default_field_id)->get()[0];
+                                                $def_field = App\Models\TemplateDefaultFields::where('id', $field->default_field_id)->get()[0];
                                             @endphp
                                             <label>{{$def_field->label}}</label>
                                             @if($def_field->type == 'Textbox')
                                                 <input type="text" name="value" class="form-control" value="{{ $def_field->value }}">
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
                                                 <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Date Textbox')
                                                 <input type="date" name="value" class="form-control" value="{{ $def_field->value }}">
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
                                                 <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Large Textbox')
                                                 <textarea name="value" class="form-control" rows="6">{{ $def_field->value }}</textarea>
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
                                                 <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Currency Textbox')
                                                 <input type="text" name="value" class="form-control currency_input" value="{{ $def_field->value }}">
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
                                                 <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($def_field->type == 'Yes/No Dropdown')
                                                 <select name="value" class="form-control">
@@ -90,7 +89,7 @@
                                                 </select>
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
                                                 <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
 
                                                 <script>
                                                     $('#{{ $field->id }} select[name="value"]').val('{{ $def_field->value }}');
@@ -118,7 +117,7 @@
                                                 </div>
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer; pointer-events: none;"></i>
                                                 <a href="#" style="color: black; pointer-events: none;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
 
                                                 <script>
                                                     $('#{{ $field->id }} select[name="value"]').val('{{ $def_field->value }}');
@@ -134,7 +133,7 @@
                                                                 <h4 class="modal-title" style="text-align:center;">Customize Dropdown</h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('buyer_leads_custom_fields.updateCustomOptions', $field->id) }}" method="post">
+                                                                <form action="{{ route('template_custom_fields.updateCustomOptions', [$field->id, $id]) }}" method="post">
                                                                     {{ csrf_field() }}
                                                                     <input type="hidden" name="custom_options" value="{{$field->custom_options}}">
                                                                     <div class="row">
@@ -192,25 +191,25 @@
                                                 <input type="text" name="value" class="form-control" value="{{ $field->value }}">
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($field->type == 'Date Textbox')
                                                 <input type="date" name="value" class="form-control" value="{{ $field->value }}">
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($field->type == 'Large Textbox')
                                                 <textarea name="value" class="form-control" rows="6">{{ $field->value }}</textarea>
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($field->type == 'Currency Textbox')
                                                 <input type="text" name="value" class="form-control currency_input" value="{{ $field->value }}">
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                             @endif
                                             @if($field->type == 'Yes/No Dropdown')
                                                 <select name="value" class="form-control">
@@ -219,7 +218,7 @@
                                                 </select>
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
 
                                                 <script>
                                                     $('#{{ $field->id }} select[name="value"]').val('{{ $field->value }}');
@@ -240,7 +239,7 @@
                                                 </div>
                                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                                <a href="{{ route('buyer_leads_custom_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                                <a href="{{ route('template_custom_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
 
                                                 <script>
                                                     $('#{{ $field->id }} select[name="value"]').val('{{ $field->value }}');
@@ -263,7 +262,7 @@
                                                         <h4 class="modal-title" style="text-align:center;">Edit Custom Field</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('buyer_leads_custom_fields.update', $field->id) }}" method="post">
+                                                        <form action="{{ route('template_custom_fields.update', [$field->id, $id]) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" name="field_condition">
                                                             <div class="row">
@@ -310,7 +309,7 @@
                                                                                     @if($c_field->id !== $field->id)
                                                                                         @if($c_field->default_field_id !== null)
                                                                                             @php
-                                                                                                $def_field3 = App\Models\BuyerLeadsDefaultFields::where('id', $c_field->default_field_id)->get()[0];
+                                                                                                $def_field3 = App\Models\TemplateDefaultFields::where('id', $c_field->default_field_id)->get()[0];
                                                                                             @endphp
                                                                                             <option value="{{$c_field->id}}">{{$def_field3->label}}</option>
                                                                                         @else
@@ -370,7 +369,7 @@
                                                         <h4 class="modal-title" style="text-align:center;">Customize Dropdown</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('buyer_leads_custom_fields.updateDefaultOptions', $field->id) }}" method="post">
+                                                        <form action="{{ route('template_custom_fields.updateDefaultOptions', [$field->id, $id]) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" name="default_options">
                                                             <div class="row">
@@ -422,7 +421,7 @@
                             <div class="actions">
                                 <i class="fa fa-ellipsis-v handle"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-section-edit-{{ $row->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
-                                <a href="{{ route('buyer_leads_custom_section.destroy', $row->id) }}" style="color: black;"><i class="fa fa-close" style="margin: 0 5px;"></i></a>
+                                <a href="{{ route('template_custom_section.destroy', [$row->id, $id]) }}" style="color: black;"><i class="fa fa-close" style="margin: 0 5px;"></i></a>
                             </div>
                             <div class="modal fade" id="modal-section-edit-{{ $row->id }}">
                                 <div class="modal-dialog" style="width: 700px;">
@@ -434,7 +433,7 @@
                                             <h4 class="modal-title" style="text-align:center;">Edit Section</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('buyer_leads_custom_section.update', $row->id) }}" method="post">
+                                            <form action="{{ route('template_custom_section.update', [$row->id, $id]) }}" method="post">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="section_condition">
                                                 <div class="row">
@@ -466,7 +465,7 @@
                                                                     @foreach($fields as $field)
                                                                         @if($field->default_field_id !== null)
                                                                             @php
-                                                                                $def_field2 = App\Models\BuyerLeadsDefaultFields::where('id', $field->default_field_id)->get()[0];
+                                                                                $def_field2 = App\Models\TemplateDefaultFields::where('id', $field->default_field_id)->get()[0];
                                                                             @endphp
                                                                             <option value="{{$field->id}}">{{$def_field2->label}}</option>
                                                                         @else
@@ -536,7 +535,7 @@
                                                 </ul>
                                                 <div class="tab-content">
                                                     <div class="active tab-pane" id="custom{{ $row->id }}">
-                                                        <form action="{{ route('store_buyer_leads_custom_fields', $row->id) }}" method="post">
+                                                        <form action="{{ route('store_template_custom_fields', $id) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" name="section_id" value="{{$row->id}}">
                                                             <div class="row">
@@ -575,7 +574,7 @@
                                                         </form>
                                                     </div>
                                                     <div class="tab-pane" id="default{{ $row->id }}">
-                                                        <form action="{{ route('store_buyer_leads_custom_fields', $row->id) }}" method="post">
+                                                        <form action="{{ route('store_template_custom_fields', $id) }}" method="post">
                                                             {{ csrf_field() }}
                                                             <input type="hidden" name="section_id" value="{{$row->id}}">
                                                             <div class="row">
@@ -623,7 +622,7 @@
                     <h4 class="modal-title" style="text-align:center;">Add Section</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('buyer_leads_custom_section.add') }}" method="post">
+                    <form action="{{ route('template_custom_section.add', $id) }}" method="post">
                         {{ csrf_field() }}
                         <input type="hidden" name="sort_id" value="{{$max_sort_id+1}}">
                         <div class="row">
@@ -656,11 +655,13 @@
     
     <script>
         $(document).ready(function(){
+            $('.page-title-link').text('Customizing Custom Fields > {{$template_name}}');
+
             function updateToDatabase(idString){
                 $.ajaxSetup({ headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'}});
                     
                 $.ajax({
-                    url:'{{url('/buyer_leads_custom_fields/update-order')}}',
+                    url:'{{url('/template_custom_fields/update-order')}}',
                     method:'POST',
                     data:{ids:idString},
                     success:function(){

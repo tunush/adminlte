@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group" style="display: block;">
                             <label for="nome">Twilio Application SID</label>
-                            <input type="text" name="application_sid" class="form-control" required="" value="{{$settings->application_sid}}">
+                            <input type="text" name="application_sid" class="form-control" value="{{$settings->application_sid}}">
                             <p style="padding-top: 5px;">Click Here To Find It : <a href="https://www.twilio.com/console/voice/twiml/apps">https://www.twilio.com/console/voice/twiml/apps</a></p>
                         </div>
                         <div class="form-group text-right" style="justify-content: end;">

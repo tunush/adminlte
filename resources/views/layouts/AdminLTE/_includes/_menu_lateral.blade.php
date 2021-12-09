@@ -43,8 +43,6 @@
 			<li class="treeview 
 				{{ Request::segment(1) === 'dashboard' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'pipeline' ? 'active menu-open' : null }}
-				{{ Request::segment(1) === 'seller' ? 'active menu-open' : null }}
-				{{ Request::segment(1) === 'buyer' ? 'active menu-open' : null }}
 				">
 				<a href="#">
 					<i class="fa fa-flask"></i>
@@ -68,44 +66,12 @@
 							</a>
 						</li>
 					@endif
-					@if (Auth::user()->can('leads-seller', ''))
-						<li class="{{ Request::segment(1) === 'seller' ? 'active' : null }}">
-							<a href="{{ route('seller') }}" title="Seller">
-								<i class="fa fa-user"></i> <span>Seller</span>
-							</a>
-						</li>
-					@endif
-					@if (Auth::user()->can('leads-buyer', ''))
-						<li class="{{ Request::segment(1) === 'buyer' ? 'active' : null }}">
-							<a href="{{ route('buyer') }}" title="Buyer">
-								<i class="fa fa-user"></i> <span>Buyer</span>
-							</a>
-						</li>
-					@endif
 				</ul>
 			</li>
 
 			@if (Auth::user()->can('estimator', ''))
 				<li class="{{ Request::segment(1) === 'estimator' ? 'active' : null }}">
 					<a href="{{ route('estimator') }}" title="Estimator"><i class="fa fa-hourglass"></i> <span>Estimator</span></a>
-				</li>
-			@endif
-
-			@if (Auth::user()->can('properties', ''))
-				<li class="{{ Request::segment(1) === 'properties' ? 'active' : null }}">
-					<a href="{{ route('properties') }}" title="Properties"><i class="fa fa-desktop"></i> <span>Properties</span></a>
-				</li>
-			@endif
-
-			@if (Auth::user()->can('buyers', ''))
-				<li class="{{ Request::segment(1) === 'buyers' ? 'active' : null }}">
-					<a href="{{ route('buyers') }}" title="Buyers"><i class="fa fa-user"></i> <span>Buyers</span></a>
-				</li>
-			@endif
-
-			@if (Auth::user()->can('contacts', ''))
-				<li class="{{ Request::segment(1) === 'contacts' ? 'active' : null }}">
-					<a href="{{ route('contacts') }}" title="Contacts"><i class="fa fa-address-book"></i> <span>Contacts</span></a>
 				</li>
 			@endif
 
@@ -124,6 +90,7 @@
 
 				{{ Request::segment(1) === 'custom_fields' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'default_fields' ? 'active menu-open' : null }}
+				{{ Request::segment(1) === 'manage_templates' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'smtp' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'phone' ? 'active menu-open' : null }}
 				{{ Request::segment(1) === 'workflow' ? 'active menu-open' : null }}
@@ -167,6 +134,13 @@
 						<li class="{{ Request::segment(1) === 'default_fields' ? 'active' : null }}">
 							<a href="{{ route('default_fields') }}" title="Default Fields">
 								<i class="fa fa-list"></i> <span>Default Fields</span>
+							</a>
+						</li>
+					@endif
+					@if (Auth::user()->can('settings-manage-templates', ''))
+						<li class="{{ Request::segment(1) === 'manage_templates' ? 'active' : null }}">
+							<a href="{{ route('manage_templates') }}" title="Manage Templates">
+								<i class="fa fa-list"></i> <span>Manage Templates</span>
 							</a>
 						</li>
 					@endif

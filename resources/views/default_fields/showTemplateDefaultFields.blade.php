@@ -2,7 +2,7 @@
 
 @section('icon_page', '')
 
-@section('title', 'Customizing Default Fields > Buyer Leads/Buyer Details')
+@section('title', '')
 
 @section('menu_pagina')	
 @endsection
@@ -14,7 +14,7 @@
                 <h3 class="text-center">Default Fields</h3>
                 <div>
                     @foreach($fields as $field)
-                    <form action="{{ route('buyer_leads_default_fields.updateValue', $field->id) }}" method="post">
+                    <form action="{{ route('template_default_fields.updateValue', [$field->id, $id]) }}" method="post">
                         {{ csrf_field() }}
                         <div id="{{$field->id}}" class="form-group" style="width: 40%;">
                             <label>{{$field->label}}</label>
@@ -23,7 +23,7 @@
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                 @if(Auth::user()->id == 1)
-                                    <a href="{{ route('buyer_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                    <a href="{{ route('template_default_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                 @endif
                             @endif
                             @if($field->type == 'Date Textbox')
@@ -31,7 +31,7 @@
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                 @if(Auth::user()->id == 1)
-                                    <a href="{{ route('buyer_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                    <a href="{{ route('template_default_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                 @endif
                             @endif
                             @if($field->type == 'Large Textbox')
@@ -39,7 +39,7 @@
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                 @if(Auth::user()->id == 1)
-                                    <a href="{{ route('buyer_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                    <a href="{{ route('template_default_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                 @endif
                             @endif
                             @if($field->type == 'Currency Textbox')
@@ -47,7 +47,7 @@
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                 @if(Auth::user()->id == 1)
-                                    <a href="{{ route('buyer_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                    <a href="{{ route('template_default_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                 @endif
                             @endif
                             @if($field->type == 'Yes/No Dropdown')
@@ -58,7 +58,7 @@
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                 @if(Auth::user()->id == 1)
-                                    <a href="{{ route('buyer_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                    <a href="{{ route('template_default_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                 @endif
 
                                 <script>
@@ -81,7 +81,7 @@
                                 <i class="fa fa-check-square" style="margin: 0 5px; cursor: pointer;"></i>
                                 <a href="#" data-toggle="modal" data-target="#modal-edit-{{ $field->id }}" style="color: black;"><i class="fa fa-pencil" style="margin: 0 5px;"></i></a>
                                 @if(Auth::user()->id == 1)
-                                    <a href="{{ route('buyer_leads_default_fields.destroy', $field->id) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
+                                    <a href="{{ route('template_default_fields.destroy', [$field->id, $id]) }}" style="color: black;"><i class="fa fa-trash" style="margin: 0 5px;"></i></a>
                                 @endif
 
                                 <script>
@@ -104,7 +104,7 @@
                                         <h4 class="modal-title" style="text-align:center;">Edit Default Field</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('buyer_leads_default_fields.update', $field->id) }}" method="post">
+                                        <form action="{{ route('template_default_fields.update', [$field->id, $id]) }}" method="post">
                                             {{ csrf_field() }}
                                             <div class="row">
                                                 <div class="col-lg-12">
@@ -161,7 +161,7 @@
                                         <h4 class="modal-title" style="text-align:center;">Customize Dropdown</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('buyer_leads_default_fields.updateDefaultOptions', $field->id) }}" method="post">
+                                        <form action="{{ route('template_default_fields.updateDefaultOptions', [$field->id, $id]) }}" method="post">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="default_options">
                                             <div class="row">
@@ -217,7 +217,7 @@
                     <h4 class="modal-title" style="text-align:center;">Add Default Field</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('store_buyer_leads_default_fields') }}" method="post">
+                    <form action="{{ route('store_template_default_fields', $id) }}" method="post">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-lg-12">
@@ -271,6 +271,8 @@
     </div>
 
     <script>
+        $('.page-title-link').text('Customizing Default Fields > {{$template_name}}');
+
         $('i.fa-check-square').click(function() {
             $(this).parent().find('.save-button button').click();
         });
