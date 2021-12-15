@@ -15,7 +15,7 @@ class ConfigController extends Controller
 		if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
 			$config = Config::find($_COOKIE["company_id"]);
 
-			$this->authorize('root-dev', $config);
+			$this->authorize('settings-profile', $config);
 				
 			return view('config.index',compact('config'));
 		} else {
@@ -25,7 +25,7 @@ class ConfigController extends Controller
 
     public function update(ConfigRequest $request, $id)
     {   
-        $this->authorize('root-dev', Config::class);
+        $this->authorize('settings-profile', Config::class);
 
     	Config::find($id)->update($request->all());		
 

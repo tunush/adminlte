@@ -15,8 +15,8 @@ use App\Models\Config;
 class UserController extends Controller 
 { 
     public function index()
-    { 
-        $this->authorize('show-user', User::class);
+    {
+        $this->authorize('settings-users', User::class);
 
         if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
             $users = User::where('company_id', $_COOKIE["company_id"])->paginate(15);
@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function show($id)
     { 
-        $this->authorize('show-user', User::class);
+        $this->authorize('settings-users', User::class);
 
     	$user = User::find($id);
 
@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $this->authorize('create-user', User::class);
+        $this->authorize('settings-users', User::class);
 
         $roles = Role::all();
 
@@ -60,7 +60,7 @@ class UserController extends Controller
         $subject = "Invitation";
         $headers = "From: " . $from;
 
-        $this->authorize('create-user', User::class);
+        $this->authorize('settings-users', User::class);
 
         if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
             $message = '<div>URL the login area: <a href="http://localhost:8000/login/'.$_COOKIE["company_id"].'">http://localhost:8000/login/'.$_COOKIE["company_id"].'</a></div>
@@ -107,7 +107,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $this->authorize('edit-user', User::class);
+        $this->authorize('settings-users', User::class);
 
     	$user = User::find($id);
 
@@ -125,7 +125,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request,$id)
     {
-    	$this->authorize('edit-user', User::class);
+    	$this->authorize('settings-users', User::class);
 
     	$user = User::find($id);
 
@@ -147,7 +147,7 @@ class UserController extends Controller
 
     public function updatePassword(UpdatePasswordUserRequest $request,$id)
     {
-    	$this->authorize('edit-user', User::class);
+    	$this->authorize('settings-users', User::class);
 
     	$user = User::find($id);
 
@@ -167,7 +167,7 @@ class UserController extends Controller
 
     public function editPassword($id)
     { 
-    	$this->authorize('edit-user', User::class);
+    	$this->authorize('settings-users', User::class);
 
     	$user = User::find($id);
 
@@ -181,7 +181,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('destroy-user', User::class);
+        $this->authorize('settings-users', User::class);
 
         $user = User::find($id);
 

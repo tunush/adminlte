@@ -173,9 +173,23 @@
 																	<div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
 																		<label for="nome">Role</label>
 																		<select name="roles[]" class="form-control select2" data-placeholder="Permission Group" required="">
+																			@php
+																				foreach($roles as $role) {
+																					if($role->name == "SuperUser"){
+																						$superuser = $role->id;
+																					}
+																				}
+																				$superuser_count = count(App\Models\Role_User::where('role_id', $superuser)->get());
+																			@endphp
 																			@foreach($roles as $role)
-																				@if($role->id != 1)                                            
-																					<option value="{{ $role->id}}"> {{ $role->name}} </option>  
+																				@if($role->id != 1)
+																					@if($role->id == $superuser)
+																						@if($superuser_count == 0)
+																							<option value="{{ $role->id}}"> {{ $role->name}} </option>
+																						@endif
+																					@else                                 
+																						<option value="{{ $role->id}}"> {{ $role->name}} </option>
+																					@endif
 																				@endif      
 																			@endforeach
 																		</select>

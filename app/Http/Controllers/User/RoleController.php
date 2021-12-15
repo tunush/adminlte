@@ -15,7 +15,7 @@ class RoleController extends Controller
 { 
     public function index()
     { 
-        $this->authorize('show-role', Role::class);
+        $this->authorize('settings-roles', Role::class);
 
         if(isset($_COOKIE["company_id"]) && $_COOKIE["company_id"] != 0) {
             $roles = Role::where('company_id', $_COOKIE["company_id"])->paginate(15);
@@ -28,8 +28,8 @@ class RoleController extends Controller
     }
 
     public function show($id)
-    { 
-        $this->authorize('show-role', User::class);
+    {
+        $this->authorize('settings-roles', User::class);
 
         $role = Role::find($id);
 
@@ -47,7 +47,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        $this->authorize('create-role', Role::class);
+        $this->authorize('settings-roles', Role::class);
 
         $permission_groups = PermissionGroup::all();
 
@@ -56,7 +56,7 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request)
     {
-        $this->authorize('create-role', Role::class);
+        $this->authorize('settings-roles', Role::class);
 
         $request->validate([
             'name' => 'required|unique:roles',
@@ -79,7 +79,7 @@ class RoleController extends Controller
 
     public function edit($id)
     { 
-        $this->authorize('edit-role', Role::class);
+        $this->authorize('settings-roles', Role::class);
 
         $role = Role::find($id);
 
@@ -97,7 +97,7 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request,$id)
     {
-        $this->authorize('edit-role', User::class);
+        $this->authorize('settings-roles', User::class);
 
         $role = Role::find($id);
 
@@ -119,7 +119,7 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('destroy-role', Role::class);
+        $this->authorize('settings-roles', Role::class);
 
         $role = Role::find($id);
 
